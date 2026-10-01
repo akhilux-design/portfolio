@@ -1,18 +1,16 @@
 # akhilux — portfolio
 
-Static portfolio site. Every page is a single self-contained HTML file (fonts, images, scripts inlined) — no build step, no dependencies.
+Static site for GitHub Pages. No build step.
 
 ## Pages
-- `index.html` — home
-- `works.html` — all works
-- `growcontech.html`, `servo.html`, `instants.html`, `skillswap.html` — case studies
+- index.html — home
+- works.html — all works
+- itethr.html, nuvionx.html, truss.html, servo.html, instants.html, skillswap.html — UI/UX case studies
+- xmec.html, ornata-arte.html, beaufort.html, lendaxa.html, foodpedia.html — logo pages
 
 ## Host on GitHub Pages
-1. Push the contents of this `site/` folder to the repo root (or a `docs/` folder).
-2. Repo **Settings → Pages** → Source: your branch (`main`) → root (or `/docs`).
-3. Live at `https://<username>.github.io/<repo>/` in ~1 min.
+1. Upload everything in this folder (including hidden files `.nojekyll` and `.image-slots.state.json`) to the repo root.
+2. Settings → Pages → Source: `main` / root.
+3. Live at https://<username>.github.io/<repo>/ in about a minute.
 
-`.nojekyll` is included so Pages serves all files as-is.
-
-## Updating
-These files are generated. Edit the `*.dc.html` source in the design project, re-export, and replace the files here.
+Pages need to be served over http(s). Opening them by double-click (file://) won't load images placed in slots.

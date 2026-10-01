@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<script src="loader.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<script src="./smooth-scroll.js"></script>
+<script src="./image-slot.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Bai+Jamjuree:wght@400;500;600;700&family=Mulish:wght@400;600;700&family=DM+Sans:wght@400;500;700&family=Kumbh+Sans:wght@500;600;700&family=Hind+Madurai:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mekbuddy/fig-assets.css">
+<link rel="stylesheet" href="mekbuddy/fig-tokens.css">
+<style>
+:root{--acc:#00ADEE;--bg:#0F0E0C;--sur:#171512;--line:#2A2723;--ink:#ECE8E0;--mut:#8F8A80}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Archivo',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--ink);text-decoration:none}a:hover{color:var(--acc)}
+.disp{font-family:'Anton',sans-serif;text-transform:uppercase;letter-spacing:.01em;line-height:.95;margin:0}
+.mono{font-family:'JetBrains Mono',monospace}
+.mut{color:var(--mut)}
+.acc{color:var(--acc)}
+.sec{padding:100px 64px;border-top:1px solid var(--line)}
+.wrap{max-width:1180px;margin:0 auto}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut)}
+.h2{font-size:clamp(40px,5.5vw,76px)}
+.tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:6px 12px;white-space:nowrap}
+.tag.hl{color:#0F0E0C;background:var(--acc);border-color:var(--acc)}
+.card{border:1px solid var(--line);border-radius:20px;background:var(--sur);padding:28px}
+.body{font-size:17px;line-height:1.7;color:var(--mut);margin:0}
+.body strong{color:var(--ink);font-weight:600}
+.navlink{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.navlink:hover{color:var(--acc)}
+.figpill{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:7px 13px;white-space:nowrap;transition:border-color .2s,color .2s}
+.figpill:hover{border-color:var(--acc);color:var(--acc)}
+.figpill.soon{color:var(--mut);border-style:dashed;pointer-events:none}
+@media (max-width:700px){.figpill{display:none}}
+.figbtn{display:none}
+@media (max-width:700px){.figbtn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;box-sizing:border-box;margin-top:40px;padding:16px 20px;border-radius:999px;background:var(--acc);color:#0F0E0C;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:500}}
+.h3{font-size:24px;font-weight:700;margin:0}
+.metric{border-top:1px solid var(--line);padding:20px 0}
+.mnum{font-family:'Anton',sans-serif;font-size:52px;line-height:1}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.quote{font-size:20px;line-height:1.5;font-weight:500;margin:0;border-left:2px solid var(--acc);padding-left:20px}
+.rv{display:block;overflow:hidden}
+.rvi{display:inline-block;transform:translateY(115%);transition:transform .9s cubic-bezier(.16,1,.3,1);transition-delay:var(--d,0s)}
+.rv.in .rvi{transform:translateY(0)}
+.fadeup{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .8s cubic-bezier(.16,1,.3,1);transition-delay:var(--d,0s)}
+.fadeup.in{opacity:1;transform:translateY(0)}
+.webv{width:100%;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--sur);box-shadow:0 20px 48px -14px rgba(0,0,0,.42),0 6px 16px -10px rgba(0,0,0,.3)}
+.shot{aspect-ratio:16/10;width:100%;overflow-y:auto;overflow-x:hidden;background:var(--sur)}
+.shot img,.ph img{width:100%;height:auto;display:block}
+.webv{position:relative}
+.webv.hasScroll::after{content:'';position:absolute;left:1px;right:1px;bottom:1px;height:72px;border-radius:0 0 13px 13px;background:linear-gradient(to top,rgba(245,241,236,.96),rgba(245,241,236,0));pointer-events:none;transition:opacity .35s}
+.webv.hasScroll::before{content:'↕ scroll';position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:2;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#111;background:#F5F1EC;border:1px solid #D3CEC6;border-radius:999px;padding:5px 11px;pointer-events:none;transition:opacity .35s}
+.webv.scrolled::before,.webv.scrolled::after{opacity:0}
+.phlabel{text-align:center;margin-top:18px}
+.phlabel .t{font-weight:700;font-size:15px}
+.phlabel .s{color:var(--mut);font-size:13px;margin-top:4px;line-height:1.5}
+.phgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(256px,1fr));gap:32px;justify-items:center}
+.phv{width:254px;height:551px;border-radius:26px;border:1px solid var(--line);overflow:hidden;box-shadow:0 20px 48px -14px rgba(0,0,0,.42),0 6px 16px -10px rgba(0,0,0,.3);margin:0 auto;background:#fff}
+.phin{width:402px;height:874px;transform:scale(.6318);transform-origin:0 0}
+.av{border-radius:50%;flex-shrink:0}
+.av1{background:linear-gradient(135deg,#FF9A4D,#E05C2A)}
+.av2{background:linear-gradient(135deg,#6C9BC0,#84C0A8)}
+.av3{background:linear-gradient(135deg,#E36A64,#8C2A2A)}
+.persona{border:1px solid var(--line);border-radius:20px;background:var(--sur);padding:28px;display:flex;flex-direction:column;gap:16px}
+.ptop{display:flex;align-items:center;gap:16px}
+.plist{margin:0;padding-left:18px;color:var(--mut);font-size:14px;line-height:1.8}
+.goal{display:flex;gap:14px;align-items:start}
+.gnum{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--acc);padding-top:3px}
+.ba{display:grid;grid-template-columns:minmax(0,1fr) 40px minmax(0,1fr);gap:20px;align-items:center;padding:24px 0;border-top:1px solid var(--line)}
+.ba:last-child{border-bottom:1px solid var(--line)}
+.bcell{font-size:15px;line-height:1.6}
+.arr{color:var(--acc);font-size:20px;text-align:center}
+.swatch{border-radius:16px;height:96px;border:1px solid var(--line);display:flex;align-items:flex-end;padding:12px;box-sizing:border-box}
+.swl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em}
+.typerow{display:flex;align-items:baseline;justify-content:space-between;gap:16px;border-top:1px solid var(--line);padding:18px 0}
+.typerow:last-child{border-bottom:1px solid var(--line)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 22px;border:1px solid var(--ink);border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;background:none;color:var(--ink);transition:all .2s}
+.btn:hover{background:var(--acc);border-color:var(--acc);color:#0F0E0C}
+.navbar{background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(12px)}
+.dotsbtn{width:46px;height:46px;border-radius:50%;border:none;background:transparent;display:grid;place-items:center;transition:background .25s}
+.dotsbtn:hover{background:var(--sur)}
+.dgrid{display:grid;grid-template-columns:3px 3px;gap:9px;transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+.dotsbtn:hover .dgrid{transform:rotate(45deg)}
+.d{width:3px;height:3px;border-radius:50%;background:var(--ink)}
+.menu{position:fixed;inset:0;background:var(--bg);z-index:50;display:flex;flex-direction:column;justify-content:space-between;padding:24px 64px;box-sizing:border-box;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s}
+.menu.open{opacity:1;visibility:visible}
+.mline{overflow:hidden;text-align:center;padding:0 30px}
+.mlink{display:inline-block;font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(56px,8.5vw,110px);line-height:1.02;color:var(--ink);transform:translateY(110%);transition:transform .25s ease,color .2s;position:relative}
+.roll{display:block;position:relative;transition:transform .55s cubic-bezier(.22,1,.36,1)}
+.rt2{position:absolute;top:100%;left:0;width:100%}
+.mlink:hover .roll{transform:translateY(-100%)}
+.msup{font-family:'JetBrains Mono',monospace;font-size:14px;position:absolute;top:10px;left:-26px;color:var(--ink);opacity:0;transition:opacity .25s}
+.mlink:hover .msup{opacity:1}
+.menu.open .mline:nth-child(1) .mlink{transition-delay:.2s}
+.menu.open .mline:nth-child(2) .mlink{transition-delay:.28s}
+.menu.open .mline:nth-child(3) .mlink{transition-delay:.36s}
+.menu.open .mlink{transform:translateY(0);transition:transform .7s cubic-bezier(.16,1,.3,1),color .2s}
+.xbtn{width:46px;height:46px;border-radius:50%;border:none;background:var(--sur);color:var(--ink);display:grid;place-items:center;font-size:16px;transition:transform .3s}
+.xbtn:hover{transform:rotate(90deg)}
+html.light{--bg:#EFEDE9;--sur:#FFFFFF;--line:#D8D4CB;--ink:#131210;--mut:#7A756B}
+html.light .logoimg{filter:invert(1)}
+html.light .phv{box-shadow:0 26px 60px -20px rgba(28,28,38,.16),0 8px 20px -12px rgba(28,28,38,.1)}
+.cover-light{display:none}
+html.light .cover-dark{display:none}
+html.light .cover-light{display:block}
+@media (pointer:fine){*{cursor:none !important}}
+.cursordot{display:none !important}
+@media (pointer:fine){.cursordot{display:flex !important}}
+html.om-editing, html.om-editing *{cursor:auto !important}
+html.om-editing .cursordot{display:none !important}
+html.om-host, html.om-host *{cursor:auto !important}
+html.om-host .cursordot{display:none !important}
+.cursordot{position:fixed;left:-100px;top:-100px;z-index:2147483647;pointer-events:none;width:14px;height:14px;border-radius:999px;background:#fff;mix-blend-mode:difference;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;transition:width .3s cubic-bezier(.22,1,.36,1),height .3s cubic-bezier(.22,1,.36,1),background .2s}
+.cursordot.hov{width:36px;height:36px}
+@media (max-width:920px){
+.sec{padding:72px 24px}
+.navbar{padding:14px 24px !important}
+.navbar .navlink{font-size:11px}
+.menu{padding:20px 24px}
+.menu .btn{padding:10px 16px;font-size:11px}
+.menu>.fx.jb{flex-direction:column;gap:16px;align-items:center}
+.msup{display:none}
+header.wrap[style]{padding:80px 24px 56px !important}
+.wrap>.grid2,.wrap.grid2,.grid2{grid-template-columns:1fr !important}
+.grid3{grid-template-columns:1fr !important}
+.grid4{grid-template-columns:1fr 1fr !important}
+.grid2[style*="64px"],.wrap.grid2[style]{gap:40px !important}
+.ba{grid-template-columns:1fr !important;gap:12px}
+.arr{transform:rotate(90deg)}
+footer{flex-wrap:wrap;gap:14px;padding:24px 24px !important;justify-content:center !important}
+}
+@media (max-width:600px){
+.grid4{grid-template-columns:1fr !important}
+.mnum{font-size:40px}
+.screengrid{grid-template-columns:repeat(2,1fr) !important;gap:22px 14px !important}
+}
+</style>
+</helmet>
+<nav class="grid ac navbar" style="grid-template-columns:1fr auto 1fr;padding:20px 64px;position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line)" data-screen-label="Nav">
+<a href="index.html" class="fx ac" style="justify-self:start"><img class="logoimg" src="assets/logo.svg" alt="akhilux" style="height:36px;width:auto;display:block"></a>
+<button class="dotsbtn" onClick="{{ openMenu }}" aria-label="Open menu"><span class="dgrid"><span class="d"></span><span class="d"></span><span class="d"></span><span class="d"></span></span></button>
+<div style="display:flex;align-items:center;gap:16px;justify-self:end"><a class="navlink" id="backlink" href="index.html">← Back home</a><a class="figpill" href="https://www.figma.com/design/ck9RzSKwMJ4tXQtwuXJGhp/Nuvionx" target="_blank" rel="noopener">Open in Figma ↗</a></div>
+</nav>
+<div class="menu {{ menuCls }}" data-screen-label="Fullscreen Menu">
+<div class="grid ac" style="grid-template-columns:1fr auto 1fr">
+<img class="logoimg" src="assets/logo.svg" alt="akhilux" style="height:36px;width:auto;justify-self:start">
+<button class="xbtn" onClick="{{ closeMenu }}" aria-label="Close menu">✕</button>
+<button class="btn" onClick="{{ toggleTheme }}" style="padding:12px 22px;justify-self:end">{{ themeLabel }}</button>
+</div>
+<div class="col" style="display:flex;flex-direction:column;align-items:center;gap:4px">
+<div class="mline"><a class="mlink" href="index.html"><span class="msup">(1)</span><span class="roll"><span>Home</span><span class="rt2">Home</span></span></a></div>
+<div class="mline"><a class="mlink" href="works.html"><span class="msup">(2)</span><span class="roll"><span>Works</span><span class="rt2">Works</span></span></a></div>
+<div class="mline"><a class="mlink" href="index.html#contact"><span class="msup">(3)</span><span class="roll"><span>Contact</span><span class="rt2">Contact</span></span></a></div>
+</div>
+<div class="fx ac jb">
+<span class="mono mut fs12" style="letter-spacing:.14em">©2026 ALL RIGHTS RESERVED</span>
+<div class="fx ac gap24"><a class="navlink" href="https://www.instagram.com/akhilu.ash/" target="_blank">Instagram ↗</a><a class="navlink" href="https://www.linkedin.com/in/akhiljith-ashok/" target="_blank">LinkedIn ↗</a><a class="navlink" href="https://www.behance.net/akhiljithashok" target="_blank">Behance ↗</a></div>
+</div>
+</div>
+<header class="wrap" style="padding:110px 64px 80px" data-screen-label="Case Study Hero">
+<div class="fx gap8 wrap" style="flex-wrap:wrap;margin-bottom:28px"><span class="tag hl">UI/UX Case Study</span><span class="tag">Website</span><span class="tag">Freelance</span><span class="tag">Healthcare</span></div>
+<h1 class="disp rv" style="font-size:clamp(52px,8vw,130px)"><span class="rvi" style="--d:.1s">Nuvionx<span class="acc">.</span></span></h1>
+<p class="body" style="max-width:720px;margin-top:28px;font-size:19px">Nuvionx Ltd is a UK-based clinical engineering company that maintains, calibrates and repairs medical equipment for hospitals and healthcare centres. I designed the brand identity and a responsive website that presents its services with <strong>the precision and reliability the sector expects</strong>.</p>
+<div class="grid4" style="margin-top:56px">
+<div><div class="kicker">Role</div><div class="fw6 mt8" style="font-size:15px">UI/UX Designer · Freelance</div></div>
+<div><div class="kicker">Client</div><div class="fw6 mt8" style="font-size:15px">Nuvionx Ltd · Newcastle upon Tyne, UK</div></div>
+<div><div class="kicker">Year</div><div class="fw6 mt8" style="font-size:15px">2025</div></div>
+<div><div class="kicker">Deliverables</div><div class="fw6 mt8" style="font-size:15px">Logo &amp; palette · Website UI · Responsive layouts · Prototype</div></div>
+</div>
+<div style="margin-top:40px"><a class="btn" href="https://www.nuvionx.co.uk/index.html" target="_blank" rel="noopener">Visit live site ↗</a></div>
+<a class="figbtn" href="https://www.figma.com/design/ck9RzSKwMJ4tXQtwuXJGhp/Nuvionx" target="_blank" rel="noopener">Open in Figma ↗</a>
+<img class="fadeup" src="assets/nuvionx-cover.png" alt="Nuvionx website pages and brand mark collage" style="width:100%;aspect-ratio:16/11;object-fit:cover;border-radius:24px;border:1px solid var(--line);margin-top:56px;display:block">
+</header>
+<section class="sec" data-screen-label="Brief"><div class="wrap grid2" style="gap:64px">
+<div><span class="kicker">01 — Brief</span><h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">Precision you can rely on<span class="acc">.</span></span></h2></div>
+<div class="col" style="display:flex;flex-direction:column;gap:20px">
+<p class="body">Nuvionx services the equipment hospitals depend on: maintenance, calibration, ultrasound probe repair, bed management and asset audits. The people choosing a provider are <strong>clinical engineering teams and facilities managers</strong>, who need to see capability, coverage and compliance quickly.</p>
+<p class="body">The company needed a brand and a website from scratch. The site had to explain a technical service catalogue clearly, <strong>earn trust before the first call</strong>, and work equally well on a desktop in an estates office and a phone on a ward.</p>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Scope"><div class="wrap">
+<span class="kicker">02 — Scope</span>
+<h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">Ten pages, three breakpoints<span class="acc">.</span></span></h2>
+<div class="grid3" style="margin-top:48px">
+<div class="card fadeup" style="display:flex;flex-direction:column;gap:14px"><div class="kicker">Core</div><ul class="plist" style="font-size:15px"><li>Home</li><li>About Us</li><li>Contact</li></ul></div>
+<div class="card fadeup" style="display:flex;flex-direction:column;gap:14px"><div class="kicker">Our Services</div><ul class="plist" style="font-size:15px"><li>Medical Equipment Maintenance</li><li>Clinical Engineering Support</li><li>Asset Management &amp; Audit Support</li><li>Professional Hospital Bed Management</li><li>Ultrasound Probe Repair</li></ul></div>
+<div class="card fadeup" style="display:flex;flex-direction:column;gap:14px"><div class="kicker">More</div><ul class="plist" style="font-size:15px"><li>Sectors We Serve</li><li>Inventory &amp; Life Cycle Management</li></ul></div>
+</div>
+<p class="body fadeup" style="max-width:680px;margin-top:40px">Every page was designed at <strong>desktop, tablet and mobile</strong>, with dedicated navigation menus and service dropdowns for each size.</p>
+</div></section>
+<section class="sec" data-screen-label="Direction"><div class="wrap grid2" style="gap:64px">
+<div><span class="kicker">03 — Direction</span><h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">Clinical, not cold<span class="acc">.</span></span></h2></div>
+<div class="col" style="display:flex;flex-direction:column;gap:26px">
+<div class="goal fadeup"><span class="gnum">G1</span><p class="body"><strong>Trust signals up front</strong>: a persistent Precision · Reliability · Compliance bar, contact details in the header, and client testimonials on the home page.</p></div>
+<div class="goal fadeup"><span class="gnum">G2</span><p class="body"><strong>Services first</strong>: each service gets its own page with a consistent hero, benefits and enquiry form, so buyers can compare like for like.</p></div>
+<div class="goal fadeup"><span class="gnum">G3</span><p class="body"><strong>Real environments</strong>: photography of labs, wards and equipment in dark, blue-graded heroes, set against light content sections.</p></div>
+<div class="goal fadeup"><span class="gnum">G4</span><p class="body"><strong>One system, three sizes</strong>: shared components for buttons, service cards, feature cards and forms across every breakpoint.</p></div>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Brand Identity"><div class="wrap grid2" style="gap:64px">
+<div>
+<span class="kicker">04 — Brand Identity</span>
+<h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">A mark with a pulse<span class="acc">.</span></span></h2>
+<p class="body" style="margin-top:20px">A deep medical blue carries the brand, headers and navigation; a brighter cyan picks out calls to action and icons. Kumbh Sans sets headings with a clean, engineered feel and Hind Madurai keeps long service descriptions easy to read.</p>
+<div style="display:grid;gap:12px;margin-top:32px;grid-template-columns:repeat(5,minmax(0,1fr))">
+<div class="swatch fadeup" style="background:#1C75B7"><span class="swl" style="color:#FFFFFF">#1C75B7</span></div>
+<div class="swatch fadeup" style="background:#00ADEE"><span class="swl" style="color:#1F2937">#00ADEE</span></div>
+<div class="swatch fadeup" style="background:#1F2937"><span class="swl" style="color:#FFFFFF">#1F2937</span></div>
+<div class="swatch fadeup" style="background:#4B5563"><span class="swl" style="color:#FFFFFF">#4B5563</span></div>
+<div class="swatch fadeup" style="background:#F5F7FA"><span class="swl" style="color:#4B5563">#F5F7FA</span></div>
+</div>
+<div style="margin-top:32px">
+<div class="typerow"><span style="font-family:'Kumbh Sans',sans-serif;font-weight:500;font-size:22px">Kumbh Sans</span><span class="kicker">Headings &amp; buttons</span></div>
+<div class="typerow"><span style="font-family:'Hind Madurai',sans-serif;font-weight:400;font-size:22px">Hind Madurai</span><span class="kicker">Body copy</span></div>
+</div>
+</div>
+<div class="fadeup" style="aspect-ratio:4/5;border-radius:20px;overflow:hidden;border:1px solid var(--line)"><image-slot id="nvx-logo" shape="rect" placeholder="Nuvionx logo on brand blue"></image-slot></div>
+</div></section>
+<section class="sec" data-screen-label="Key Pages"><div class="wrap">
+<span class="kicker">05 — Key Pages</span>
+<h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">The website<span class="acc">.</span></span></h2>
+<div class="grid2" style="margin-top:56px;gap:40px 24px">
+<figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="webv fadeup" style="border-radius:20px;overflow:hidden;border:1px solid var(--line)"><div class="shot"><img src="assets/nvx-home.webp" alt="Nuvionx home page" loading="lazy"></div></div><figcaption class="phlabel"><div class="t">Home</div><div class="s">Hero, services overview, testimonials</div></figcaption></figure>
+<figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="webv fadeup" style="border-radius:20px;overflow:hidden;border:1px solid var(--line)"><div class="shot"><img src="assets/nvx-about.webp" alt="Nuvionx about page" loading="lazy"></div></div><figcaption class="phlabel"><div class="t">About Us</div><div class="s">Story, vision and values</div></figcaption></figure>
+<figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="webv fadeup" style="border-radius:20px;overflow:hidden;border:1px solid var(--line)"><div class="shot"><img src="assets/nvx-service.webp" alt="Nuvionx service page" loading="lazy"></div></div><figcaption class="phlabel"><div class="t">Service detail</div><div class="s">Medical Equipment Maintenance</div></figcaption></figure>
+<figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="webv fadeup" style="border-radius:20px;overflow:hidden;border:1px solid var(--line)"><div class="shot"><img src="assets/nvx-contact.webp" alt="Nuvionx contact page" loading="lazy"></div></div><figcaption class="phlabel"><div class="t">Contact</div><div class="s">Enquiry form and locations</div></figcaption></figure>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Responsive"><div class="wrap">
+<span class="kicker">06 — Responsive</span>
+<h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">Built for the ward, too<span class="acc">.</span></span></h2>
+<p class="body" style="max-width:680px;margin-top:20px">Tablet and mobile layouts reflow each section and replace the dropdowns with a full-screen blue menu that keeps phone, address and Book Now within reach.</p>
+<div class="grid4" style="margin-top:56px">
+<figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="webv fadeup" style="border-radius:20px;overflow:hidden;border:1px solid var(--line)"><div class="shot" style="aspect-ratio:9/19.5"><img src="assets/nvx-mob-1.webp" alt="Nuvionx mobile Home" loading="lazy"></div></div><figcaption class="phlabel"><div class="t">Home</div></figcaption></figure>
+<figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="webv fadeup" style="border-radius:20px;overflow:hidden;border:1px solid var(--line)"><div class="shot" style="aspect-ratio:9/19.5"><img src="assets/nvx-mob-2.webp" alt="Nuvionx mobile Menu" loading="lazy"></div></div><figcaption class="phlabel"><div class="t">Menu</div></figcaption></figure>
+<figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="webv fadeup" style="border-radius:20px;overflow:hidden;border:1px solid var(--line)"><div class="shot" style="aspect-ratio:9/19.5"><img src="assets/nvx-mob-3.webp" alt="Nuvionx mobile Service Detail" loading="lazy"></div></div><figcaption class="phlabel"><div class="t">Service</div></figcaption></figure>
+<figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="webv fadeup" style="border-radius:20px;overflow:hidden;border:1px solid var(--line)"><div class="shot" style="aspect-ratio:9/19.5"><img src="assets/nvx-mob-4.webp" alt="Nuvionx mobile Contact" loading="lazy"></div></div><figcaption class="phlabel"><div class="t">Contact</div></figcaption></figure>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Prototype"><div class="wrap">
+<div class="grid2" style="gap:64px">
+<div><span class="kicker">07 — Prototype</span><h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">In motion<span class="acc">.</span></span></h2></div>
+<div class="col" style="display:flex;flex-direction:column;gap:20px"><p class="body">A clickable Figma prototype covered the full site: an animated logo splash, navigation and service dropdowns, and scroll-triggered reveals on headings, images and buttons, handed over as the reference for development.</p><p class="mono mut" style="font-size:11px;letter-spacing:.06em;margin:0">Click inside the frame to interact · Use the fullscreen icon for the best view</p></div>
+</div>
+<div class="fadeup" style="margin-top:56px;aspect-ratio:16/10;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--sur)"><iframe src="https://embed.figma.com/proto/ck9RzSKwMJ4tXQtwuXJGhp/Nuvionx?node-id=926-2726&amp;p=f&amp;viewport=220%2C208%2C0.02&amp;scaling=scale-down-width&amp;content-scaling=fixed&amp;bg-color=F5F7FA&amp;starting-point-node-id=926%3A3848&amp;page-id=926%3A2725&amp;embed-host=share" title="Nuvionx interactive Figma prototype" allowfullscreen="" loading="lazy" style="width:100%;height:100%;border:0;display:block"></iframe></div>
+</div></section>
+<section class="sec" data-screen-label="Next Project"><div class="wrap fx ac jb" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px">
+<div><span class="kicker">Next up</span><h2 class="disp rv" style="font-size:clamp(32px,4vw,56px);margin-top:12px"><span class="rvi">Truss<span class="acc">.</span></span></h2></div>
+<a class="btn" href="truss.html">Read the case study →</a>
+</section>
+<footer class="fx ac jb" style="padding:28px 64px;border-top:1px solid var(--line)" data-screen-label="Footer">
+<span class="fx ac gap8 mono mut fs12" style="font-size: 14px">©2026 akhilux</span>
+<img class="logoimg" src="assets/logo.svg" alt="akhilux" style="height: 28px; width: 70px; display: block"><a class="navlink" href="#top">Go back to top ↑</a>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#00ADEE&quot;,&quot;options&quot;:[&quot;#00ADEE&quot;,&quot;#FF5149&quot;,&quot;#E31B25&quot;,&quot;#FF8400&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;showDisclaimer&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;}}">
+class Component extends DCLogic {
+  state = { menuOpen: false, light: localStorage.getItem('akhilux-theme') === 'light' };
+  updateBackLink() {
+    const el = document.getElementById('backlink');
+    if (el && /Works\.dc\.html/i.test(document.referrer)) { el.textContent = '← Back to Works'; el.setAttribute('href', 'works.html'); }
+  }
+  componentDidMount() {
+    this.updateBackLink();
+    this.applyAccent();
+    document.documentElement.classList.toggle('light', this.state.light);
+    const reveal = () => {
+      const vh = window.innerHeight;
+      document.querySelectorAll('.rv:not(.in),.fadeup:not(.in)').forEach(el => {
+        if (el.getBoundingClientRect().top < vh * 0.92) el.classList.add('in');
+      });
+    };
+    this.revealFn = reveal;
+    requestAnimationFrame(reveal);
+    this.revealTimer = setInterval(() => {
+      reveal();
+      if (!document.querySelector('.rv:not(.in),.fadeup:not(.in)')) clearInterval(this.revealTimer);
+    }, 200);
+    const markScroll = () => {
+      document.querySelectorAll('.shot').forEach(sh => {
+        const frame = sh.closest('.webv');
+        if (!frame) return;
+        frame.classList.toggle('hasScroll', sh.scrollHeight - sh.clientHeight > 8);
+        if (!sh.dataset.scrollBound) {
+          sh.dataset.scrollBound = '1';
+          sh.addEventListener('scroll', () => {
+            const f = sh.closest('.webv');
+            if (f) f.classList.toggle('scrolled', sh.scrollTop > 6);
+          });
+        }
+      });
+    };
+    this.markScroll = markScroll;
+    markScroll();
+    this.shotTimer = setInterval(markScroll, 500);
+    setTimeout(() => clearInterval(this.shotTimer), 8000);
+    window.addEventListener('resize', markScroll);
+    let c = document.getElementById('om-cursor');
+    if (!c) {
+      c = document.createElement('div');
+      c.id = 'om-cursor';
+      c.className = 'cursordot';
+      document.body.appendChild(c);
+    }
+    this.cursorEl = c;
+    this.cursorMove = e => {
+      c.style.left = e.clientX + 'px';
+      c.style.top = e.clientY + 'px';
+      const t = e.target instanceof Element ? e.target : null;
+      const hov = t && t.closest('a,button,input,textarea,.inp');
+      c.classList.toggle('hov', !!hov);
+    };
+    document.addEventListener('mousemove', this.cursorMove);
+    this.editChk = () => {
+      const ae = document.activeElement;
+      const editing = !!(ae && ae.closest && ae.closest('[contenteditable], input, textarea'));
+      document.documentElement.classList.toggle('om-editing', editing);
+    };
+    document.addEventListener('focusin', this.editChk);
+    this.editChkOut = () => setTimeout(this.editChk, 0);
+    document.addEventListener('focusout', this.editChkOut);
+    try { if (window.top !== window.self) document.documentElement.classList.add('om-host'); } catch (e) { document.documentElement.classList.add('om-host'); }
+  }
+  componentWillUnmount() {
+    document.removeEventListener('focusin', this.editChk);
+    document.removeEventListener('focusout', this.editChkOut);
+    if (this.revealTimer) clearInterval(this.revealTimer);
+    if (this.shotTimer) clearInterval(this.shotTimer);
+    if (this.markScroll) window.removeEventListener('resize', this.markScroll);
+    if (this.cursorMove) document.removeEventListener('mousemove', this.cursorMove);
+    if (this.cursorEl) this.cursorEl.remove();
+  }
+  componentDidUpdate() {
+    this.applyAccent();
+    document.documentElement.classList.toggle('light', this.state.light);
+  }
+  applyAccent() {
+    document.documentElement.style.setProperty('--acc', this.props.accent ?? '#00ADEE');
+  }
+  renderVals() {
+    return {
+      showDisclaimer: this.props.showDisclaimer ?? true,
+      menuCls: this.state.menuOpen ? 'open' : '',
+      openMenu: () => this.setState({ menuOpen: true }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      themeLabel: this.state.light ? 'Switch to dark mode' : 'Switch to light mode',
+      toggleTheme: () => this.setState(s => {
+        const light = !s.light;
+        localStorage.setItem('akhilux-theme', light ? 'light' : 'dark');
+        return { light };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

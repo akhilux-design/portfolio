@@ -93,7 +93,7 @@ html.om-host .cursordot{display:none !important}
 .navbar .btn{padding:14px !important}
 .mailic{width:18px;height:18px}
 #work .wrap>.grid{grid-template-columns:1fr !important}
-#gdgrid{grid-template-columns:1fr !important}
+.lgrid{grid-template-columns:1fr !important}
 .thumb{height:240px}
 footer{flex-wrap:wrap;gap:14px;padding:24px 24px !important;justify-content:center !important}
 }
@@ -105,7 +105,7 @@ footer{flex-wrap:wrap;gap:14px;padding:24px 24px !important;justify-content:cent
 <nav class="grid ac navbar" style="grid-template-columns:1fr auto 1fr;padding:20px 64px;position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line)" data-screen-label="Nav">
 <a href="index.html#top" class="fx ac" style="justify-self:start"><img class="logoimg" src="assets/logo.svg" alt="akhilux" style="height:36px;width:auto;display:block"></a>
 <button class="dotsbtn" onClick="{{ openMenu }}" aria-label="Open menu"><span class="dgrid"><span class="d"></span><span class="d"></span><span class="d"></span><span class="d"></span></span></button>
-<a class="navlink" href="index.html#top" style="justify-self:end">← Back home</a>
+<a class="navlink" href="works.html#graphic" style="justify-self:end">← All works</a>
 </nav>
 <div class="menu {{ menuCls }}" data-screen-label="Fullscreen Menu">
 <div class="grid ac" style="grid-template-columns:1fr auto 1fr">
@@ -124,37 +124,27 @@ footer{flex-wrap:wrap;gap:14px;padding:24px 24px !important;justify-content:cent
 </div>
 </div>
 
-<header id="worktop" class="wrap" style="padding:150px 64px 20px" data-screen-label="Works Hero">
-<h1 class="disp rv" style="font-size:clamp(64px,13vw,220px);margin-top:24px"><span class="rvi">Works<span class="acc">.</span></span></h1>
-<div class="fx jb fadeup" style="margin-top:32px;align-items:flex-end;gap:32px;flex-wrap:wrap;--d:.15s">
-<p class="mut" style="max-width:520px;margin:0;line-height:1.7">Every project — shipped products, in-depth case studies and concept explorations. Client work is anonymized where required by NDA.</p>
-<span class="mono mut fs13">{{ workCount }} projects</span>
-</div>
+<header id="worktop" class="wrap" style="padding:150px 64px 20px" data-screen-label="Logo Hero">
+<a class="navlink fadeup" href="works.html#graphic">← Graphic design</a>
+<h1 class="disp rv" style="font-size:clamp(56px,11vw,180px);margin-top:28px"><span class="rvi">LENDAXA<span class="acc">.</span></span></h1>
+<div class="fx fadeup" style="margin-top:28px;gap:8px;flex-wrap:wrap;--d:.15s"><span class="tag hl">Logo design</span><span class="tag">Graphic design</span></div>
 </header>
-<section id="work" class="sec" style="border-top:none;padding-top:56px" data-screen-label="All Works"><div class="wrap">
-<div class="grid" style="grid-template-columns:1fr 1fr;gap:24px">
-<a class="card fadeup" href="itethr.html"><div class="thumb"><img src="assets/itethr-cover.webp" alt="iTethr case study cover" style="width:100%;height:100%;object-fit:cover;display:block"></div><div class="cmeta"><div><div class="fw7 fs20">iTethr — Community platform for international students</div><div class="mut fs13 mt8">UI/UX case study · iOS app · Freelance for AeonovX</div></div><div class="fx gap8"><span class="tag hl">2025</span><span class="tag">Case study</span></div></div></a>
-<a class="card fadeup" href="nuvionx.html"><div class="thumb"><img src="assets/nuvionx-cover.png" alt="Nuvionx case study cover" style="width:100%;height:100%;object-fit:cover;display:block"></div><div class="cmeta"><div><div class="fw7 fs20">Nuvionx — Medical equipment services, UK</div><div class="mut fs13 mt8">UI/UX case study · Brand &amp; responsive website · Freelance</div></div><div class="fx gap8"><span class="tag hl">2025</span><span class="tag">Case study</span></div></div></a>
-<a class="card fadeup" href="truss.html"><div class="thumb"><img src="./truss-cover-mu8f7xa4-qbgm.png" alt="Truss case study cover" style="width:100%;height:100%;object-fit:cover;display:block"></div><div class="cmeta"><div><div class="fw7 fs20">Truss — Construction Procurement Made Easy</div><div class="mut fs13 mt8">UX/UI case study · B2B marketplace · 4 portals + site app</div></div><div class="fx gap8"><span class="tag hl">2024</span><span class="tag">Case study</span></div></div></a>
-<a class="card fadeup" href="servo.html"><div class="thumb"><img src="./smartphone-mockup-with-dynamic-island-di-msqh5pcr-7nv3.png" alt="Servo case study cover" style="width: 100%; height: 100%; object-fit: cover; display: block"></div><div class="cmeta"><div><div class="fw7 fs20">Servo — Car servicing, the Uber way</div><div class="mut fs13 mt8">UX/UI case study · Connected service network</div></div><div class="fx gap8"><span class="tag hl">2022</span><span class="tag">Case study</span></div></div></a>
-<a class="card fadeup" href="instants.html"><div class="thumb"><image-slot id="proj-instants" shape="rect" placeholder="Instants case study cover"></image-slot></div><div class="cmeta"><div><div class="fw7 fs20">Instants — Rethinking ephemeral sharing</div><div class="mut fs13 mt8">UX case study · Social app feature redesign</div></div><div class="fx gap8"><span class="tag hl">2026</span><span class="tag">Case study</span></div></div></a>
-<a class="card fadeup" href="skillswap.html"><div class="thumb"><image-slot id="proj-skillswap" shape="rect" placeholder="SkillSwap case study cover"></image-slot></div><div class="cmeta"><div><div class="fw7 fs20">SkillSwap</div><div class="mut" style="margin-top:6px;font-size:14px">Learn and trade life skills in 2-minute clips — concept case study</div></div><div class="fx gap8"><span class="tag">Mobile</span><span class="tag hl">Case study</span></div></div></a>
-<a class="card fadeup" href="#work"><div class="thumb"><image-slot id="proj-comunify" shape="rect" placeholder="ComUnify product cover"></image-slot></div><div class="cmeta"><div><div class="fw7 fs20">Community living platform</div><div class="mut fs13 mt8">Product design · Concept → market · NDA</div></div><div class="fx gap8"><span class="tag">2021–26</span><span class="tag">Product</span></div></div></a>
-</div>
-<div class="fadeup" style="display:flex;justify-content:center;margin-top:64px"></div>
+<section id="work" class="sec" style="border-top:none;padding-top:56px" data-screen-label="Logo Cover"><div class="wrap">
+<figure class="fadeup" style="margin:0;display:flex;flex-direction:column;gap:14px"><div style="aspect-ratio:16/9;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--thumb)"><image-slot id="lg-lendaxa-cover" shape="rect" placeholder="LENDAX - Abstract bg"></image-slot></div><figcaption class="mono mut" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase">LENDAX - Abstract bg</figcaption></figure>
 </div></section>
-<section id="graphic" class="sec" data-screen-label="Graphic Design"><div class="wrap">
-<div class="fx jb fadeup" style="align-items:flex-end;gap:24px;flex-wrap:wrap">
-<div><div class="kicker">Graphic design</div><h2 class="disp" style="font-size:clamp(40px,5vw,64px);margin-top:16px">Logos<span class="acc">.</span></h2></div>
-<span class="mono mut fs13">05 projects</span>
+<section class="sec" data-screen-label="Logo Variations"><div class="wrap">
+<div class="kicker fadeup">Variations</div>
+<div class="grid lgrid" style="grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:32px">
+<figure class="fadeup" style="margin:0;display:flex;flex-direction:column;gap:14px"><div style="aspect-ratio:1/1;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--thumb)"><image-slot id="lg-lendaxa-lendaxa-1080" shape="rect" placeholder="LENDAXA - 1080"></image-slot></div><figcaption class="mono mut" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase">LENDAXA - 1080</figcaption></figure>
+<figure class="fadeup" style="margin:0;display:flex;flex-direction:column;gap:14px"><div style="aspect-ratio:1/1;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--thumb)"><image-slot id="lg-lendaxa-lendaxa-1080bg" shape="rect" placeholder="LENDAXA - 1080bg"></image-slot></div><figcaption class="mono mut" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase">LENDAXA - 1080bg</figcaption></figure>
+<figure class="fadeup" style="margin:0;display:flex;flex-direction:column;gap:14px"><div style="aspect-ratio:16/10;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--thumb)"><image-slot id="lg-lendaxa-lendaxa-1080h" shape="rect" placeholder="LENDAXA - 1080h"></image-slot></div><figcaption class="mono mut" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase">LENDAXA - 1080h</figcaption></figure>
+<figure class="fadeup" style="margin:0;display:flex;flex-direction:column;gap:14px"><div style="aspect-ratio:1/1;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--thumb)"><image-slot id="lg-lendaxa-lendaxa-1080l" shape="rect" placeholder="LENDAXA - 1080l"></image-slot></div><figcaption class="mono mut" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase">LENDAXA - 1080l</figcaption></figure>
+<figure class="fadeup" style="margin:0;display:flex;flex-direction:column;gap:14px"><div style="aspect-ratio:1/1;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--thumb)"><image-slot id="lg-lendaxa-lendaxa-512" shape="rect" placeholder="LENDAXA - 512"></image-slot></div><figcaption class="mono mut" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase">LENDAXA - 512</figcaption></figure>
+<figure class="fadeup" style="margin:0;display:flex;flex-direction:column;gap:14px"><div style="aspect-ratio:16/10;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--thumb)"><image-slot id="lg-lendaxa-lendax-abstract" shape="rect" placeholder="LENDAX - Abstract"></image-slot></div><figcaption class="mono mut" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase">LENDAX - Abstract</figcaption></figure>
 </div>
-<div class="grid" id="gdgrid" style="grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:40px">
-<a class="card fadeup" href="xmec.html"><div class="thumb" style="height:240px"><img src="./xmec-meet-2023---claude-thumbnail-muochky7-3xqh.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div><div class="cmeta" style="padding:18px 20px"><div><div class="fw7" style="font-size:17px">xMEC Meet 2023</div><div class="mut fs13 mt8">Logo design</div></div><span class="tag">Logo</span></div></a>
-<a class="card fadeup" href="ornata-arte.html"><div class="thumb" style="height:240px"><img src="./ornata-arte---claude-thumbnail-muocap61-ck5x.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div><div class="cmeta" style="padding:18px 20px"><div><div class="fw7" style="font-size:17px">Ornata Arte</div><div class="mut fs13 mt8">Logo design</div></div><span class="tag">Logo</span></div></a>
-<a class="card fadeup" href="beaufort.html"><div class="thumb" style="height:240px"><img src="./beaufort---claude-thumbnail-muoc6f8r-wj53.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div><div class="cmeta" style="padding:18px 20px"><div><div class="fw7" style="font-size:17px">BeauFort</div><div class="mut fs13 mt8">Construction company · Logo redesign</div></div><span class="tag">Logo</span></div></a>
-<a class="card fadeup" href="lendaxa.html"><div class="thumb" style="height: 240px"><img src="./lendaxa---claude-thumbnail-muoc1a0l-8yx5.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div><div class="cmeta" style="padding: 18px 20px"><div><div class="fw7" style="font-size:17px">LENDAXA</div><div class="mut fs13 mt8">Logo design</div></div><span class="tag">Logo</span></div></a>
-<a class="card fadeup" href="foodpedia.html"><div class="thumb" style="height:240px"><img src="./foodpedia---claude-thumbnail-muocrvoi-qhj7.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div><div class="cmeta" style="padding:18px 20px"><div><div class="fw7" style="font-size:17px">FoodPedia</div><div class="mut fs13 mt8">Logo design</div></div><span class="tag">Logo</span></div></a>
-</div>
+</div></section>
+<section class="sec" data-screen-label="Next Up"><div class="wrap">
+<a class="fx jb ac fadeup" href="foodpedia.html" style="gap:24px;flex-wrap:wrap"><div><div class="kicker">Next up</div><div class="disp h2" style="margin-top:16px">FoodPedia <span class="acc">→</span></div></div></a>
 </div></section>
 <footer class="fx ac jb" style="padding:28px 64px;border-top:1px solid var(--line)" data-screen-label="Footer">
 <span class="fx ac gap8 mono mut fs12" style="font-size: 14px">©2026 akhilux</span>
@@ -192,7 +182,7 @@ class Component extends DCLogic {
       c.style.left = e.clientX + 'px';
       c.style.top = e.clientY + 'px';
       const t = e.target instanceof Element ? e.target : null;
-      const card = t && t.closest('#work .card, #graphic .card');
+      const card = t && t.closest('#work .card');
       const hov = t && t.closest('a,button,input,textarea,.inp');
       c.classList.toggle('view', !!card);
       c.classList.toggle('hov', !card && !!hov);
@@ -225,8 +215,7 @@ class Component extends DCLogic {
   }
   renderVals() {
     return {
-      workCount: '07',
-      menuCls: this.state.menuOpen ? 'open' : '',
+            menuCls: this.state.menuOpen ? 'open' : '',
       themeLabel: this.state.light ? 'Switch to dark mode' : 'Switch to light mode',
       openMenu: () => this.setState({ menuOpen: true }),
       closeMenu: () => this.setState({ menuOpen: false }),

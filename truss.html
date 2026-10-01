@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<script src="loader.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<script src="./smooth-scroll.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Archivo:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+:root{--acc:#FF5600;--bg:#0F0E0C;--sur:#171512;--line:#2A2723;--ink:#ECE8E0;--mut:#8F8A80}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Archivo',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--ink);text-decoration:none}a:hover{color:var(--acc)}
+.disp{font-family:'Anton',sans-serif;text-transform:uppercase;letter-spacing:.01em;line-height:.95;margin:0}
+.mono{font-family:'JetBrains Mono',monospace}
+.mut{color:var(--mut)}
+.acc{color:var(--acc)}
+.sec{padding:100px 64px;border-top:1px solid var(--line)}
+.wrap{max-width:1180px;margin:0 auto}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut)}
+.h2{font-size:clamp(40px,5.5vw,76px)}
+.tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:6px 12px;white-space:nowrap}
+.tag.hl{color:#0F0E0C;background:var(--acc);border-color:var(--acc)}
+.card{border:1px solid var(--line);border-radius:20px;background:var(--sur);padding:28px}
+.body{font-size:17px;line-height:1.7;color:var(--mut);margin:0;text-wrap:pretty}
+.navlink{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.navlink:hover{color:var(--acc)}
+.figpill{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:7px 13px;white-space:nowrap;transition:border-color .2s,color .2s}
+.figpill:hover{border-color:var(--acc);color:var(--acc)}
+.figpill.soon{color:var(--mut);border-style:dashed;pointer-events:none}
+@media (max-width:700px){.figpill{display:none}}
+.figbtn{display:none}
+@media (max-width:700px){.figbtn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;box-sizing:border-box;margin-top:40px;padding:16px 20px;border-radius:999px;background:var(--acc);color:#111;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:500}}
+.h3{font-size:24px;font-weight:700;margin:0}
+.metric{border-top:1px solid var(--line);padding:20px 0}
+.mnum{font-family:'Anton',sans-serif;font-size:52px;line-height:1}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.grid5{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+.card .pc,.iacol .pc{white-space:normal}
+.sysstate{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px;align-items:center}
+.quote{font-size:20px;line-height:1.5;font-weight:500;margin:0;border-left:2px solid var(--acc);padding-left:20px}
+.rv{display:block;overflow:hidden}
+.rvi{display:inline-block;transform:translateY(115%);transition:transform .9s cubic-bezier(.16,1,.3,1);transition-delay:var(--d,0s)}
+.rv.in .rvi{transform:translateY(0)}
+.fadeup{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .8s cubic-bezier(.16,1,.3,1);transition-delay:var(--d,0s)}
+.fadeup.in{opacity:1;transform:translateY(0)}
+.webv{width:100%;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--sur);box-shadow:0 20px 48px -14px rgba(0,0,0,.42),0 6px 16px -10px rgba(0,0,0,.3)}
+.webbar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:#1D1B18;border-bottom:1px solid var(--line)}
+.webbar span{width:10px;height:10px;border-radius:50%;display:block}
+.imgph{background:repeating-linear-gradient(45deg,#1C1A16,#1C1A16 10px,#191712 10px,#191712 20px);display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;box-sizing:border-box}
+.imgph span{font-family:'JetBrains Mono',monospace;font-size:10px;color:#6B6558;letter-spacing:.1em;text-transform:uppercase;line-height:1.7}
+.shot{aspect-ratio:16/10;width:100%;overflow-y:auto;overflow-x:hidden;background:var(--sur)}
+.shot img,.ph img{width:100%;height:auto;display:block}
+.webv{position:relative}
+.webv.hasScroll::after{content:'';position:absolute;left:1px;right:1px;bottom:1px;height:72px;border-radius:0 0 13px 13px;background:linear-gradient(to top,rgba(245,241,236,.96),rgba(245,241,236,0));pointer-events:none;transition:opacity .35s}
+.webv.hasScroll::before{content:'↕ scroll';position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:2;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#111;background:#F5F1EC;border:1px solid #D3CEC6;border-radius:999px;padding:5px 11px;pointer-events:none;transition:opacity .35s}
+.webv.scrolled::before,.webv.scrolled::after{opacity:0}
+.paper{width:100%;border-radius:8px;overflow:hidden;background:#fff;box-shadow:0 24px 60px -18px rgba(0,0,0,.5),0 6px 18px -10px rgba(0,0,0,.34)}
+.paper img{width:100%;height:auto;display:block}
+.pairgrid{grid-template-rows:auto auto}
+.paircol{display:grid;grid-row:span 2;grid-template-rows:subgrid;gap:24px}
+html.light .paper{box-shadow:0 26px 60px -20px rgba(28,28,38,.2),0 8px 20px -12px rgba(28,28,38,.12)}
+.ph{width:100%;max-width:260px;aspect-ratio:9/19;border-radius:18px;border:1px solid var(--line);background:#131210;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 48px -14px rgba(0,0,0,.45)}
+.phlabel{margin-top:18px}
+.phlabel .t{font-weight:700;font-size:15px}
+.phlabel .s{color:var(--mut);font-size:13px;margin-top:4px;line-height:1.5}
+.pc{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:5px 11px;border-radius:999px;white-space:nowrap;font-weight:500}
+.chip{font-family:'JetBrains Mono',monospace;font-size:11px;padding:7px 13px;border-radius:999px;border:1px solid var(--line);color:var(--mut);white-space:nowrap}
+.pill{border:1px solid var(--line);border-radius:16px;background:var(--sur);padding:16px 20px;min-width:130px}
+.pnum{font-family:'Anton',sans-serif;font-size:30px;line-height:1}
+.chainarr{color:var(--acc);font-size:18px;align-self:center}
+.av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:'Anton',sans-serif;font-size:16px}
+.step{display:grid;grid-template-columns:52px minmax(0,1fr) minmax(0,1.05fr);gap:32px;padding:44px 0;border-top:1px solid var(--line);align-items:start}
+.step:last-child{border-bottom:1px solid var(--line)}
+.snum{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--mut);padding-top:6px;letter-spacing:.1em}
+.iacol{border-left:1px solid var(--line);padding-left:20px}
+.ialist{margin:12px 0 0;padding:0;list-style:none;color:var(--mut);font-size:14px;line-height:2.1}
+.dcard{border:1px solid var(--line);border-radius:20px;background:var(--sur);padding:26px;display:flex;flex-direction:column;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 22px;border:1px solid var(--ink);border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;background:none;color:var(--ink);transition:all .2s}
+.btn:hover{background:var(--acc);border-color:var(--acc);color:#0F0E0C}
+.navbar{background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(12px)}
+.dotsbtn{width:46px;height:46px;border-radius:50%;border:none;background:transparent;display:grid;place-items:center;transition:background .25s}
+.dotsbtn:hover{background:var(--sur)}
+.dgrid{display:grid;grid-template-columns:3px 3px;gap:9px;transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+.dotsbtn:hover .dgrid{transform:rotate(45deg)}
+.d{width:3px;height:3px;border-radius:50%;background:var(--ink)}
+.menu{position:fixed;inset:0;background:var(--bg);z-index:50;display:flex;flex-direction:column;justify-content:space-between;padding:24px 64px;box-sizing:border-box;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s}
+.menu.open{opacity:1;visibility:visible}
+.mline{overflow:hidden;text-align:center;padding:0 30px}
+.mlink{display:inline-block;font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(56px,8.5vw,110px);line-height:1.02;color:var(--ink);transform:translateY(110%);transition:transform .25s ease,color .2s;position:relative}
+.roll{display:block;position:relative;transition:transform .55s cubic-bezier(.22,1,.36,1)}
+.rt2{position:absolute;top:100%;left:0;width:100%}
+.mlink:hover .roll{transform:translateY(-100%)}
+.msup{font-family:'JetBrains Mono',monospace;font-size:14px;position:absolute;top:10px;left:-26px;color:var(--ink);opacity:0;transition:opacity .25s}
+.mlink:hover .msup{opacity:1}
+.menu.open .mline:nth-child(1) .mlink{transition-delay:.2s}
+.menu.open .mline:nth-child(2) .mlink{transition-delay:.28s}
+.menu.open .mline:nth-child(3) .mlink{transition-delay:.36s}
+.menu.open .mlink{transform:translateY(0);transition:transform .7s cubic-bezier(.16,1,.3,1),color .2s}
+.xbtn{width:46px;height:46px;border-radius:50%;border:none;background:var(--sur);color:var(--ink);display:grid;place-items:center;font-size:16px;transition:transform .3s}
+.xbtn:hover{transform:rotate(90deg)}
+html.light{--bg:#EFEDE9;--sur:#FFFFFF;--line:#D8D4CB;--ink:#131210;--mut:#7A756B}
+html.light .logoimg{filter:invert(1)}
+html.light .webv,html.light .ph{box-shadow:0 26px 60px -20px rgba(28,28,38,.16),0 8px 20px -12px rgba(28,28,38,.1)}
+html.light .webbar{background:#E7E4DD}
+html.light .imgph{background:repeating-linear-gradient(45deg,#EAE6DF,#EAE6DF 10px,#E3DFD7 10px,#E3DFD7 20px)}
+html.light .imgph span{color:#9C9588}
+html.light .ph{background:#F6F4F0}
+@media (pointer:fine){*{cursor:none !important}}
+.cursordot{display:none !important}
+@media (pointer:fine){.cursordot{display:flex !important}}
+html.om-editing, html.om-editing *{cursor:auto !important}
+html.om-editing .cursordot{display:none !important}
+html.om-host, html.om-host *{cursor:auto !important}
+html.om-host .cursordot{display:none !important}
+.cursordot{position:fixed;left:-100px;top:-100px;z-index:2147483647;pointer-events:none;width:14px;height:14px;border-radius:999px;background:#fff;mix-blend-mode:difference;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;transition:width .3s cubic-bezier(.22,1,.36,1),height .3s cubic-bezier(.22,1,.36,1),background .2s}
+.cursordot.hov{width:36px;height:36px}
+@media (max-width:920px){
+.sec{padding:72px 24px}
+.navbar{padding:14px 24px !important}
+.navbar .navlink{font-size:11px}
+.menu{padding:20px 24px}
+.menu .btn{padding:10px 16px;font-size:11px}
+.menu>.fx.jb{flex-direction:column;gap:16px;align-items:center}
+.msup{display:none}
+header.wrap[style]{padding:80px 24px 56px !important}
+.grid2{grid-template-columns:1fr !important}
+.grid3{grid-template-columns:1fr !important}
+.grid4{grid-template-columns:1fr 1fr !important}
+.step{grid-template-columns:1fr !important;gap:20px;padding:36px 0}
+.snum{padding-top:0}
+.iacol{border-left:none;border-top:1px solid var(--line);padding-left:0;padding-top:16px}
+footer{flex-wrap:wrap;gap:14px;padding:24px 24px !important;justify-content:center !important}
+}
+@media (max-width:600px){
+.grid4{grid-template-columns:1fr !important}
+.mnum{font-size:40px}
+}
+</style>
+</helmet>
+<nav class="grid ac navbar" style="grid-template-columns:1fr auto 1fr;padding:20px 64px;position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line)" data-screen-label="Nav">
+<a href="index.html" class="fx ac" style="justify-self:start"><img class="logoimg" src="assets/logo.svg" alt="akhilux" style="height:36px;width:auto;display:block"></a>
+<button class="dotsbtn" onClick="{{ openMenu }}" aria-label="Open menu"><span class="dgrid"><span class="d"></span><span class="d"></span><span class="d"></span><span class="d"></span></span></button>
+<div style="display:flex;align-items:center;gap:16px;justify-self:end"><a class="navlink" id="backlink" href="index.html">← Back home</a><a class="figpill" href="https://www.figma.com/design/trQIFFJq59T5VLYTn7Fgfq/Truss---Construction-Procurement-Platform---New" target="_blank" rel="noopener">Open in Figma ↗</a></div>
+</nav>
+<div class="menu {{ menuCls }}" data-screen-label="Fullscreen Menu">
+<div class="grid ac" style="grid-template-columns:1fr auto 1fr">
+<img class="logoimg" src="assets/logo.svg" alt="akhilux" style="height:36px;width:auto;justify-self:start">
+<button class="xbtn" onClick="{{ closeMenu }}" aria-label="Close menu">✕</button>
+<button class="btn" onClick="{{ toggleTheme }}" style="padding:12px 22px;justify-self:end">{{ themeLabel }}</button>
+</div>
+<div class="col" style="display:flex;flex-direction:column;align-items:center;gap:4px">
+<div class="mline"><a class="mlink" href="index.html"><span class="msup">(1)</span><span class="roll"><span>Home</span><span class="rt2">Home</span></span></a></div>
+<div class="mline"><a class="mlink" href="works.html"><span class="msup">(2)</span><span class="roll"><span>Works</span><span class="rt2">Works</span></span></a></div>
+<div class="mline"><a class="mlink" href="index.html#contact"><span class="msup">(3)</span><span class="roll"><span>Contact</span><span class="rt2">Contact</span></span></a></div>
+</div>
+<div class="fx ac jb">
+<span class="mono mut fs12" style="letter-spacing:.14em">©2026 ALL RIGHTS RESERVED</span>
+<div class="fx ac gap24"><a class="navlink" href="https://www.instagram.com/akhilu.ash/" target="_blank">Instagram ↗</a><a class="navlink" href="https://www.linkedin.com/in/akhiljith-ashok/" target="_blank">LinkedIn ↗</a><a class="navlink" href="https://www.behance.net/akhiljithashok" target="_blank">Behance ↗</a></div>
+</div>
+</div>
+<header class="wrap" style="padding:110px 64px 80px" data-screen-label="Case Study Hero">
+<div class="fx gap8 wrap" style="flex-wrap:wrap;margin-bottom:28px"><span class="tag hl">UX/UI Case Study</span><span class="tag">Web Platform</span><span class="tag">B2B Marketplace</span><span class="tag">4 Portals + Site App</span></div>
+<h1 class="disp rv" style="font-size:clamp(48px,7.5vw,120px)"><span class="rvi" style="--d:.1s">Truss<span class="acc">.</span></span></h1>
+<p class="disp" style="font-size:clamp(20px,2.4vw,34px);margin-top:22px;color:var(--mut)">CONSTRUCTION PROCUREMENT MADE EASY</p>
+<p class="body" style="max-width:760px;margin-top:24px;font-size:19px">Construction procurement in Kerala still runs on phone calls, notebooks, and negotiation by attrition. Truss connects everyone in the loop — <strong>contractors, vendors, site stores, and the Truss team — each with their own portal</strong> — so enquiring, quoting, and purchasing materials happens in one transparent system.</p>
+<div class="grid4" style="margin-top:56px">
+<div><div class="kicker">Role</div><div class="fw6 mt8" style="font-size:15px">Product Designer — solo: research, IA, UX, UI, design system</div></div>
+<div><div class="kicker">Scope</div><div class="fw6 mt8" style="font-size:15px">4 portals, a mobile site app, public site</div></div>
+<div><div class="kicker">Output</div><div class="fw6 mt8" style="font-size:15px">157 screens · 1 design system · 4 themes from one set of components</div></div>
+<div><div class="kicker">Market</div><div class="fw6 mt8" style="font-size:15px">India (Kerala) — ₹, GST, E-Way bill, IS standards</div></div>
+</div>
+<a class="figbtn" href="https://www.figma.com/design/trQIFFJq59T5VLYTn7Fgfq/Truss---Construction-Procurement-Platform---New" target="_blank" rel="noopener">Open in Figma ↗</a>
+<div class="webv fadeup" style="margin-top:56px">
+<img src="uploads/00_Truss-Cover.png" alt="Truss — Cover: tilted grid of portal screens around a dark Truss splash" style="width:100%;height:auto;display:block">
+</div>
+<p class="mono mut" style="font-size:11px;letter-spacing:.06em;margin-top:16px">[Truss — Cover] · Portal screens around the Truss splash. Figures on this page come from prototype data.</p>
+</header>
+<section class="sec" data-screen-label="Problem"><div class="wrap">
+<span class="kicker">01 — The problem</span>
+<h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">Four ways to lose money<span class="acc">.</span></span></h2>
+<div class="grid4" style="margin-top:48px">
+<div class="card fadeup"><div class="h3" style="font-size:19px">Opaque prices.</div><p class="body" style="margin-top:12px;font-size:15px">Contractors call 3–4 dealers per requirement and still don't know if the price was fair.</p></div>
+<div class="card fadeup" style="--d:.06s"><div class="h3" style="font-size:19px">Lost in handover.</div><p class="body" style="margin-top:12px;font-size:15px">The office orders, the site receives. Short or damaged deliveries surface days later, if at all.</p></div>
+<div class="card fadeup" style="--d:.12s"><div class="h3" style="font-size:19px">Stock nobody can see.</div><p class="body" style="margin-top:12px;font-size:15px">Surplus at one site is bought again for another. Stores keep paper registers that never match.</p></div>
+<div class="card fadeup" style="--d:.18s"><div class="h3" style="font-size:19px">Trust is manual.</div><p class="body" style="margin-top:12px;font-size:15px">Anyone can claim to be a dealer. Disputes are settled by whoever shouts louder.</p></div>
+</div>
+</div></section>
+<section class="sec" data-screen-label="The Cast"><div class="wrap">
+<span class="kicker">02 — The cast</span>
+<h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">Five people, one shared order record</span></h2>
+<div class="grid5" style="margin-top:48px">
+<div class="card fadeup" style="padding:24px">
+<div class="av" style="background:#FF5600;color:#111">SV</div>
+<div class="h3" style="font-size:17px;margin-top:16px">Sean Varghese</div>
+<p class="body" style="font-size:14px;margin-top:6px">Director, Skyline Builders.</p>
+<span class="pc" style="background:#FF5600;color:#111;display:inline-block;margin-top:14px">Contractor portal</span>
+</div>
+<div class="card fadeup" style="padding:24px;--d:.06s">
+<div class="av" style="background:#2F45FF;color:#fff">AM</div>
+<div class="h3" style="font-size:17px;margin-top:16px">Anita Menon</div>
+<p class="body" style="font-size:14px;margin-top:6px">Owner, Prestige Materials.</p>
+<span class="pc" style="background:#2F45FF;color:#fff;display:inline-block;margin-top:14px">Vendor portal</span>
+</div>
+<div class="card fadeup" style="padding:24px;--d:.12s">
+<div class="av" style="background:#08845B;color:#fff">RN</div>
+<div class="h3" style="font-size:17px;margin-top:16px">Rahul Nair</div>
+<p class="body" style="font-size:14px;margin-top:6px">Store manager, Kakkanad Central Store.</p>
+<span class="pc" style="background:#08845B;color:#fff;display:inline-block;margin-top:14px">Warehouse portal</span>
+</div>
+<div class="card fadeup" style="padding:24px;--d:.18s">
+<div class="av" style="background:var(--sur);color:var(--ink);border:1px solid var(--line)">AK</div>
+<div class="h3" style="font-size:17px;margin-top:16px">Anil Kumar</div>
+<p class="body" style="font-size:14px;margin-top:6px">Site engineer, Block B.</p>
+<span class="pc" style="border:1px solid var(--line);color:var(--ink);display:inline-block;margin-top:14px">Truss Site (mobile)</span>
+</div>
+<div class="card fadeup" style="padding:24px;--d:.24s">
+<div class="av" style="background:#D9145A;color:#fff">MK</div>
+<div class="h3" style="font-size:17px;margin-top:16px">Meera Krishnan</div>
+<p class="body" style="font-size:14px;margin-top:6px">Operations lead, Truss.</p>
+<span class="pc" style="background:#D9145A;color:#fff;display:inline-block;margin-top:14px">Admin portal</span>
+</div>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Information Architecture"><div class="wrap">
+<span class="kicker">03 — Information architecture</span>
+<h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">One door each<span class="acc">.</span></span></h2>
+<div class="grid5" style="margin-top:48px;gap:0">
+<div class="iacol fadeup" style="border-left:none">
+<span class="pc" style="background:#FF5600;color:#111">Contractor</span>
+<ul class="ialist"><li>Home</li><li>Projects</li><li>Enquiries</li><li>Orders</li><li>Warehouses</li><li>Vendors</li></ul>
+</div>
+<div class="iacol fadeup" style="--d:.06s">
+<span class="pc" style="background:#2F45FF;color:#fff">Vendor</span>
+<ul class="ialist"><li>Home</li><li>Enquiries</li><li>Orders</li><li>Catalogue</li><li>Customers</li><li>Rates</li></ul>
+</div>
+<div class="iacol fadeup" style="--d:.12s">
+<span class="pc" style="background:#08845B;color:#fff">Warehouse</span>
+<ul class="ialist"><li>Home</li><li>Deliveries</li><li>Stock</li><li>Requests</li><li>Transfers</li><li>Reports</li></ul>
+</div>
+<div class="iacol fadeup" style="--d:.18s">
+<span class="pc" style="background:#D9145A;color:#fff">Admin</span>
+<ul class="ialist"><li>Home</li><li>Verifications</li><li>Companies</li><li>Rates</li><li>Orders</li><li>Disputes</li></ul>
+</div>
+<div class="iacol fadeup" style="--d:.24s">
+<span class="pc" style="border:1px solid var(--line);color:var(--ink)">Site app (mobile)</span>
+<ul class="ialist"><li>Home</li><li>New request</li><li>Tracking</li><li>Handover</li><li>History</li></ul>
+</div>
+</div>
+<div class="card fadeup" style="margin-top:32px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding:22px 26px">
+<span class="kicker">Public site</span>
+<div class="fx" style="display:flex;gap:10px;flex-wrap:wrap"><span class="chip">Landing</span><span class="chip">For vendors</span><span class="chip">Choose your role</span><span class="chip">One sign-in for everyone</span><span class="chip">Choose a workspace</span></div>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Design System"><div class="wrap grid2" style="gap:64px;align-items:start">
+<div>
+<span class="kicker">04 — One design system, four themes</span>
+<h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">One library, re-themed</span></h2>
+<p class="body" style="margin-top:20px">The foundation is a quiet, document-like system: cream canvas #F5F1EC, ink #111, hairline #D3CEC6, and Inter with JetBrains Mono for IDs.</p>
+<p class="body" style="margin-top:16px">One component library is re-themed by a single "Portal" variable mode, so every portal feels related but distinct: <strong>Contractor orange</strong>, with ink text on the accent; <strong>Vendor blue</strong>, <strong>Warehouse green</strong> and <strong>Admin crimson</strong>, with white text on the accent.</p>
+<p class="body" style="margin-top:16px">Charcoal is always the primary button. The accent colour is used for at most one hero action per screen.</p>
+<div class="grid4" style="gap:12px;margin-top:28px">
+<div class="fadeup" style="border-radius:14px;height:88px;background:#FF5600;display:flex;align-items:flex-end;padding:12px;box-sizing:border-box"><span class="mono" style="font-size:10px;color:#111">#FF5600</span></div>
+<div class="fadeup" style="border-radius:14px;height:88px;background:#2F45FF;display:flex;align-items:flex-end;padding:12px;box-sizing:border-box;--d:.06s"><span class="mono" style="font-size:10px;color:#fff">#2F45FF</span></div>
+<div class="fadeup" style="border-radius:14px;height:88px;background:#08845B;display:flex;align-items:flex-end;padding:12px;box-sizing:border-box;--d:.12s"><span class="mono" style="font-size:10px;color:#fff">#08845B</span></div>
+<div class="fadeup" style="border-radius:14px;height:88px;background:#D9145A;display:flex;align-items:flex-end;padding:12px;box-sizing:border-box;--d:.18s"><span class="mono" style="font-size:10px;color:#fff">#D9145A</span></div>
+</div>
+<div class="fx" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:28px"><span class="chip">Button</span><span class="chip">Badge</span><span class="chip">Text field</span><span class="chip">Select</span><span class="chip">Table</span><span class="chip">Alert</span><span class="chip">Modal</span><span class="chip">Top bar</span><span class="chip">Stat card</span><span class="chip">Stock meter</span><span class="chip">Order stepper</span><span class="chip">Timeline event</span><span class="chip">Quote card</span><span class="chip">Document tile</span><span class="chip">Price</span></div>
+</div>
+<div>
+<div class="webv fadeup">
+<div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div>
+<div class="shot"><img src="uploads/00_Design-System-Cover.png" alt="Design System &amp; Components page"></div>
+</div>
+<div class="phlabel"><div class="t">157 screens built from the same components.</div></div>
+</div>
+</div></section>
+<section class="sec" data-screen-label="One Order End to End"><div class="wrap">
+<span class="kicker">05 — One order, end to end</span>
+<h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">The whole loop, one record<span class="acc">.</span></span></h2>
+<p class="mono acc" style="font-size:12px;letter-spacing:.1em;margin-top:24px">ORD-2026-0419 · 750 bags UltraTech OPC 53 · Skyline Heights</p>
+<p class="body" style="max-width:680px;margin-top:14px">Wed 17 Sep → Mon 22 Sep → paid by 21 Oct. Each step is the real screen at that moment.</p>
+<div id="timeline" style="margin-top:48px">
+<div class="step" data-portal="Contractor">
+<div class="snum">01</div>
+<div><span class="pc" style="background:#FF5600;color:#111">Contractor</span><div class="mono mut" style="font-size:11px;margin-top:14px;letter-spacing:.08em">Wed 17 Sep, 8:30 AM</div><div class="h3" style="margin-top:10px;font-size:22px">Sean asks once.</div><p class="body" style="margin-top:10px;font-size:15px">750 bags go to every verified dealer who delivers to Kakkanad, not four phone calls.</p></div>
+<div class="webv fadeup"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/C-04.2_New-enquiry.png" alt="C-04.2 · New enquiry"></div></div>
+</div>
+<div class="step" data-portal="Contractor">
+<div class="snum">02</div>
+<div><span class="pc" style="background:#FF5600;color:#111">Contractor</span><div class="mono mut" style="font-size:11px;margin-top:14px;letter-spacing:.08em">8:31 AM</div><div class="h3" style="margin-top:10px;font-size:22px">Reuse before buying.</div><p class="body" style="margin-top:10px;font-size:15px">Truss checks Skyline's own stores first: Vyttila has 120 surplus bags, moved later by transfer (TRF-0032).</p></div>
+<div class="webv fadeup"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/C-04.3_Modal-Stock-check.png" alt="C-04.3 · Modal · Stock check — reuse before buying"></div></div>
+</div>
+<div class="step" data-portal="Admin">
+<div class="snum">03</div>
+<div><span class="pc" style="background:#D9145A;color:#fff">Admin</span><div class="mono mut" style="font-size:11px;margin-top:14px;letter-spacing:.08em">6:00 AM, every day</div><div class="h3" style="margin-top:10px;font-size:22px">The market rate everyone sees.</div><p class="body" style="margin-top:10px;font-size:15px">Truss publishes the Kochi median (₹412/bag) from live vendor prices. Outliers are held for review, not published.</p></div>
+<div class="webv fadeup"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/A-05.1_Rates-Daily-board.png" alt="A-05.1 · Rates · Daily board"></div></div>
+</div>
+<div class="step" data-portal="Vendor">
+<div class="snum">04</div>
+<div><span class="pc" style="background:#2F45FF;color:#fff">Vendor</span><div class="mono mut" style="font-size:11px;margin-top:14px;letter-spacing:.08em">10:05 AM</div><div class="h3" style="margin-top:10px;font-size:22px">Anita quotes in two minutes.</div><p class="body" style="margin-top:10px;font-size:15px">₹412/bag incl. GST, delivery 19 Sep, 30-day credit, with today's market rate beside her price.</p></div>
+<div class="webv fadeup"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/V-03.2_Enquiry-Send-quote.png" alt="V-03.2 · Enquiry · New → Send quote"></div></div>
+</div>
+<div class="step" data-portal="Contractor">
+<div class="snum">05</div>
+<div><span class="pc" style="background:#FF5600;color:#111">Contractor</span><div class="mono mut" style="font-size:11px;margin-top:14px;letter-spacing:.08em">10:40 AM</div><div class="h3" style="margin-top:10px;font-size:22px">Three quotes, side by side.</div><p class="body" style="margin-top:10px;font-size:15px">Price, delivery, credit terms and vendor record in one view, against the market rate.</p></div>
+<div class="webv fadeup"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/C-04.4_Compare-quotes.png" alt="C-04.4 · Compare quotes"></div></div>
+</div>
+<div class="step" data-portal="Contractor">
+<div class="snum">06</div>
+<div><span class="pc" style="background:#FF5600;color:#111">Contractor</span><div class="mono mut" style="font-size:11px;margin-top:14px;letter-spacing:.08em">11:02 AM</div><div class="h3" style="margin-top:10px;font-size:22px">Negotiation without attrition.</div><p class="body" style="margin-top:10px;font-size:15px">Sean counters in the thread with the ₹405 quote as leverage. Prestige settles at ₹408 with 30-day credit.</p></div>
+<div class="webv fadeup"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/C-04.5_Negotiate.png" alt="C-04.5 · Negotiate with a vendor"></div></div>
+</div>
+<div class="step" data-portal="Contractor">
+<div class="snum">07</div>
+<div><span class="pc" style="background:#FF5600;color:#111">Contractor</span><div class="mono mut" style="font-size:11px;margin-top:14px;letter-spacing:.08em">11:12 AM</div><div class="h3" style="margin-top:10px;font-size:22px">Order placed · ₹3,06,000.</div><p class="body" style="margin-top:10px;font-size:15px">Purchase order PO-SKY-2026-118 is generated from the record. Under Sean's limit, so no approval step.</p></div>
+<div class="webv fadeup"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/C-04.6_Modal-Place-order.png" alt="C-04.6 · Modal · Place order"></div></div>
+</div>
+<div class="step" data-portal="Vendor">
+<div class="snum">08</div>
+<div><span class="pc" style="background:#2F45FF;color:#fff">Vendor</span><div class="mono mut" style="font-size:11px;margin-top:14px;letter-spacing:.08em">11:40 AM → Fri 7:30 AM</div><div class="h3" style="margin-top:10px;font-size:22px">Confirm and dispatch.</div><p class="body" style="margin-top:10px;font-size:15px">Prestige confirms, generates the E-Way bill and adds the vehicle. The store sees it instantly.</p></div>
+<div class="webv fadeup"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/V-04.3_Order-Ready-to-dispatch.png" alt="V-04.3 · Order · Ready to dispatch"></div></div>
+</div>
+<div class="step" data-portal="Warehouse">
+<div class="snum">09</div>
+<div><span class="pc" style="background:#08845B;color:#fff">Warehouse</span><div class="mono mut" style="font-size:11px;margin-top:14px;letter-spacing:.08em">Fri 19 Sep, 7:30 AM</div><div class="h3" style="margin-top:10px;font-size:22px">The store knows it's coming.</div><p class="body" style="margin-top:10px;font-size:15px">Rahul's day starts with the gate schedule: 750 bags, KL-41-H-2218, ETA 9:40.</p></div>
+<div class="webv fadeup"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/W-02.1_Home-Today.png" alt="W-02.1 · Home · Today"></div></div>
+</div>
+<div class="step" data-portal="Warehouse">
+<div class="snum">10</div>
+<div><span class="pc" style="background:#08845B;color:#fff">Warehouse</span><div class="mono mut" style="font-size:11px;margin-top:14px;letter-spacing:.08em">9:36 AM</div><div class="h3" style="margin-top:10px;font-size:22px">Paperwork matched at the gate.</div><p class="body" style="margin-top:10px;font-size:15px">Vehicle, E-Way bill, quantity and amount are checked against the order automatically. A missing test certificate is flagged.</p></div>
+<div class="webv fadeup"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/W-03.2_Gate-check-in.png" alt="W-03.2 · Delivery · Gate check-in"></div></div>
+</div>
+<div class="step" data-portal="Warehouse">
+<div class="snum">11</div>
+<div><span class="pc" style="background:#08845B;color:#fff">Warehouse</span><div class="mono mut" style="font-size:11px;margin-top:14px;letter-spacing:.08em">10:18 AM</div><div class="h3" style="margin-top:10px;font-size:22px">Quality check with evidence.</div><p class="body" style="margin-top:10px;font-size:15px">750 counted, 12 torn bags rejected with photos, setting-time sample sent to the lab.</p></div>
+<div class="webv fadeup"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/W-03.3_Quality-check.png" alt="W-03.3 · Delivery · Quality check"></div></div>
+</div>
+<div class="step" data-portal="Warehouse">
+<div class="snum">12</div>
+<div><span class="pc" style="background:#08845B;color:#fff">Warehouse</span><div class="mono mut" style="font-size:11px;margin-top:14px;letter-spacing:.08em">10:22 AM</div><div class="h3" style="margin-top:10px;font-size:22px">Goods received note.</div><p class="body" style="margin-top:10px;font-size:15px">Stock updates (42 → 780 bags), a ₹4,896 credit note is requested, and Sean can pay ₹3,01,104.</p></div>
+<div class="webv fadeup"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/W-03.5_Goods-received.png" alt="W-03.5 · Delivery · Goods received"></div></div>
+</div>
+<div class="step" data-portal="Contractor">
+<div class="snum">13</div>
+<div><span class="pc" style="background:#FF5600;color:#111">Contractor</span><div class="mono mut" style="font-size:11px;margin-top:14px;letter-spacing:.08em">10:23 AM</div><div class="h3" style="margin-top:10px;font-size:22px">Sean hears about it on his phone.</div><p class="body" style="margin-top:10px;font-size:15px">One message with the outcome and a link; no portal visit needed.</p></div>
+<div class="fadeup" style="display:flex;justify-content:center"><div class="ph"><div style="flex:1;overflow:hidden"><img src="uploads/M-01_Messages-Contractor-Sean.png" alt="M-01 · Messages · Contractor (Sean)"></div></div></div>
+</div>
+<div class="step" data-portal="Site app">
+<div class="snum">14</div>
+<div><span class="pc" style="border:1px solid var(--line);color:var(--ink)">Site app</span><div class="mono mut" style="font-size:11px;margin-top:14px;letter-spacing:.08em">Mon 22 Sep, 6:34 AM</div><div class="h3" style="margin-top:10px;font-size:22px">180 bags to the slab.</div><p class="body" style="margin-top:10px;font-size:15px">Anil signs for the cement on his phone. ₹1,04,640 is booked to Block B, 9th floor.</p></div>
+<div class="fadeup" style="display:flex;justify-content:center"><div class="ph"><div style="flex:1;overflow:hidden"><img src="uploads/S-05_Handover-Confirm-receipt.png" alt="S-05 · Handover · Confirm receipt"></div></div></div>
+</div>
+<div class="step" data-portal="Vendor">
+<div class="snum">15</div>
+<div><span class="pc" style="background:#2F45FF;color:#fff">Vendor</span><div class="mono mut" style="font-size:11px;margin-top:14px;letter-spacing:.08em">Due 21 Oct</div><div class="h3" style="margin-top:10px;font-size:22px">Paid what was accepted.</div><p class="body" style="margin-top:10px;font-size:15px">Prestige sees ₹3,01,104 against INV-2026-0402, with credit note CN-PM-0012 already applied.</p></div>
+<div class="webv fadeup"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/V-04.9_Payments.png" alt="V-04.9 · Payments · Receivables &amp; payouts"></div></div>
+</div>
+<div class="step" data-portal="Admin">
+<div class="snum">16</div>
+<div><span class="pc" style="background:#D9145A;color:#fff">Admin</span><div class="mono mut" style="font-size:11px;margin-top:14px;letter-spacing:.08em">Payment day, 4:00 PM</div><div class="h3" style="margin-top:10px;font-size:22px">Truss pays out T+1.</div><p class="body" style="margin-top:10px;font-size:15px">The payout run sends cleared money to Prestige's verified account. Holds and disputes are skipped automatically.</p></div>
+<div class="webv fadeup"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/A-06.5_Payments-Holds-payouts.png" alt="A-06.5 · Payments · Holds &amp; payouts"></div></div>
+</div>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Numbers"><div class="wrap">
+<span class="kicker">06 — Numbers that carry through</span>
+<h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">Every portal shows the same figures, because they all read one record.</span></h2>
+<div class="fx" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:48px;align-items:stretch">
+<div class="pill fadeup"><div class="kicker" style="font-size:10px">Vendor</div><div class="pnum" style="margin-top:8px">₹412</div><div class="body" style="font-size:13px;margin-top:6px">Prestige's quote</div></div>
+<span class="chainarr">→</span>
+<div class="pill fadeup" style="--d:.04s"><div class="kicker" style="font-size:10px">Contractor</div><div class="pnum" style="margin-top:8px">₹408</div><div class="body" style="font-size:13px;margin-top:6px">negotiated price</div></div>
+<span class="chainarr">→</span>
+<div class="pill fadeup" style="--d:.08s"><div class="kicker" style="font-size:10px">Contractor</div><div class="pnum" style="margin-top:8px">₹3,06,000</div><div class="body" style="font-size:13px;margin-top:6px">750-bag order</div></div>
+<span class="chainarr">→</span>
+<div class="pill fadeup" style="--d:.12s"><div class="kicker" style="font-size:10px">Warehouse</div><div class="pnum" style="margin-top:8px">12 bags</div><div class="body" style="font-size:13px;margin-top:6px">rejected at the gate</div></div>
+<span class="chainarr">→</span>
+<div class="pill fadeup" style="--d:.16s"><div class="kicker" style="font-size:10px">Warehouse</div><div class="pnum" style="margin-top:8px">– ₹4,896</div><div class="body" style="font-size:13px;margin-top:6px">credit note</div></div>
+<span class="chainarr">→</span>
+<div class="pill fadeup" style="--d:.2s"><div class="kicker" style="font-size:10px">Contractor</div><div class="pnum" style="margin-top:8px">₹3,01,104</div><div class="body" style="font-size:13px;margin-top:6px">invoice paid</div></div>
+<span class="chainarr">→</span>
+<div class="pill fadeup" style="--d:.24s;border-color:var(--acc)"><div class="kicker" style="font-size:10px">Admin</div><div class="pnum acc" style="margin-top:8px">T+1</div><div class="body" style="font-size:13px;margin-top:6px">payout to Prestige</div></div>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Portal Highlights"><div class="wrap">
+<span class="kicker">07 — Portal highlights</span>
+<h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">Four cockpits<span class="acc">.</span></span></h2>
+<div style="margin-top:56px;display:flex;flex-direction:column;gap:64px">
+<div>
+<div class="fx ac" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><span class="pc" style="background:#FF5600;color:#111">Contractor</span></div>
+<p class="body" style="max-width:720px;margin-top:16px">Projects carry budgets. Buying is one flow: stock check → enquiry → compare → negotiate → order. Orders above ₹5 L go to the director.</p>
+<div class="grid3" style="margin-top:28px">
+<div class="webv fadeup"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/C-02.1_Home.png" alt="C-02.1 · Home"></div></div>
+<div class="webv fadeup" style="--d:.06s"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/C-03.5_Material-plan.png" alt="C-03.5 · Project · Material plan"></div></div>
+<div class="webv fadeup" style="--d:.12s"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/C-05.5_Modal-Report-a-problem.png" alt="C-05.5 · Modal · Report a problem (raise dispute)"></div></div>
+</div>
+</div>
+<div>
+<div class="fx ac" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><span class="pc" style="background:#2F45FF;color:#fff">Vendor</span></div>
+<p class="body" style="max-width:720px;margin-top:16px">Real enquiries from verified buyers, today's market rate next to every quote, credit limits per customer, payment T+1.</p>
+<div class="grid3" style="margin-top:28px">
+<div class="webv fadeup"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/V-02.1_Home.png" alt="V-02.1 · Home"></div></div>
+<div class="webv fadeup" style="--d:.06s"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/V-04.8_Dispute-Respond.png" alt="V-04.8 · Dispute · Respond"></div></div>
+<div class="webv fadeup" style="--d:.12s"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/V-04.9_Payments.png" alt="V-04.9 · Payments · Receivables &amp; payouts"></div></div>
+</div>
+</div>
+<div>
+<div class="fx ac" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><span class="pc" style="background:#08845B;color:#fff">Warehouse</span></div>
+<p class="body" style="max-width:720px;margin-top:16px">Receiving is a guided flow (gate → quality → goods received note), with partial acceptance built in. The stock register reconciles itself, and site engineers request material instead of calling.</p>
+<div class="grid3" style="margin-top:28px">
+<div class="webv fadeup"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/W-04.2_Stock-Item-ledger.png" alt="W-04.2 · Stock · Item ledger"></div></div>
+<div class="webv fadeup" style="--d:.06s"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/W-05.2_Request-Issue-material.png" alt="W-05.2 · Request · Issue material"></div></div>
+<div class="webv fadeup" style="--d:.12s"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/W-07.2_Reports-Monthly-consumption.png" alt="W-07.2 · Reports · Monthly consumption"></div></div>
+</div>
+</div>
+<div>
+<div class="fx ac" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><span class="pc" style="background:#D9145A;color:#fff">Admin</span></div>
+<p class="body" style="max-width:720px;margin-top:16px">A risk-first home. Verification with automatic GSTN, PAN and bank checks, and a 24-hour deadline. Rates that need review only on exceptions. Disputes decided on the order's evidence.</p>
+<div class="grid3" style="margin-top:28px">
+<div class="webv fadeup"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/A-02.1_Home-Needs-attention.png" alt="A-02.1 · Home · Needs attention"></div></div>
+<div class="webv fadeup" style="--d:.06s"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/A-03.2_Verification-Review-vendor.png" alt="A-03.2 · Verification · Review vendor"></div></div>
+<div class="webv fadeup" style="--d:.12s"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/A-06.2_Dispute-Detail.png" alt="A-06.2 · Dispute · Detail"></div></div>
+</div>
+</div>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Beyond the Portals"><div class="wrap">
+<span class="kicker">08 — Beyond the portals</span>
+<h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">The rest of the system</span></h2>
+<div class="grid2 pairgrid" style="margin-top:48px;gap:32px">
+<div class="paircol">
+<div>
+<div class="h3" style="font-size:19px">Truss Site (mobile).</div>
+<p class="body" style="font-size:15px;margin-top:10px">Site engineers request material from the store's real stock and sign for it on their phone.</p>
+</div>
+<div class="fx" style="display:flex;gap:16px"><div class="ph fadeup" style="width:auto;max-width:none;flex:1;aspect-ratio:390/844"><div style="flex:1;overflow:hidden"><img src="uploads/S-02_Home.png" alt="S-02 · Home"></div></div><div class="ph fadeup" style="width:auto;max-width:none;flex:1;aspect-ratio:390/844;--d:.06s"><div style="flex:1;overflow:hidden"><img src="uploads/S-03_New-request.png" alt="S-03 · New request"></div></div></div>
+</div>
+<div class="paircol">
+<div>
+<div class="h3" style="font-size:19px">Messages &amp; documents.</div>
+<p class="body" style="font-size:15px;margin-top:10px">Short chat and SMS updates with one link, plus a purchase order, goods received note and GST tax invoice generated from the same record.</p>
+</div>
+<div style="position:relative"><div class="paper fadeup" style="position:absolute;inset:0;overflow:hidden"><img src="uploads/D-03_Tax-invoice-credit-note.png" alt="D-03 · Tax invoice + credit note"></div></div>
+</div>
+</div>
+<div style="margin-top:48px">
+<div class="h3" style="font-size:19px">Public site &amp; one sign-in.</div>
+<p class="body" style="font-size:15px;margin-top:10px;max-width:720px">A landing page, then one door that routes each person to their portal.</p>
+<div class="grid2" style="margin-top:24px">
+<div class="webv fadeup"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/P-01_Landing-page.png" alt="P-01 · Landing page"></div></div>
+<div class="webv fadeup" style="--d:.06s"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/P-05_Choose-a-workspace.png" alt="P-05 · Choose a workspace"></div></div>
+</div>
+</div>
+<div class="card fadeup sysstate" style="margin-top:48px">
+<div>
+<span class="kicker">System states</span>
+<p class="body" style="margin-top:12px;font-size:15px">Offline at the gate (check-ins queue on the tablet), session expired, no access, maintenance.</p>
+</div>
+<div class="webv"><div class="webbar"><span style="background:#D9145A"></span><span style="background:#FF5600"></span><span style="background:#08845B"></span></div><div class="shot"><img src="uploads/X-05_Offline-at-the-gate.png" alt="X-05 · Offline at the gate"></div></div>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Design Decisions"><div class="wrap">
+<span class="kicker">09 — Design decisions</span>
+<h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">Six decisions that make one record work for five people.</span></h2>
+<div class="grid3" style="margin-top:48px">
+<div class="dcard fadeup"><span class="mono acc" style="font-size:12px">01</span><div class="h3" style="font-size:19px">One order record, many views.</div><p class="body" style="font-size:15px">The enquiry, PO, GRN, invoice and payout are all views of one record, so ₹3,06,000 is ₹3,06,000 everywhere.</p></div>
+<div class="dcard fadeup" style="--d:.06s"><span class="mono acc" style="font-size:12px">02</span><div class="h3" style="font-size:19px">Partial acceptance, not pass/fail.</div><p class="body" style="font-size:15px">Accepting 738 of 750 bags with a photo-backed credit note removes the most common argument in the loop.</p></div>
+<div class="dcard fadeup" style="--d:.12s"><span class="mono acc" style="font-size:12px">03</span><div class="h3" style="font-size:19px">Show the market next to every price.</div><p class="body" style="font-size:15px">Vendors quote against the published Kochi median and contractors compare against it. Negotiation becomes a conversation about data, not stamina.</p></div>
+<div class="dcard fadeup" style="--d:.06s"><span class="mono acc" style="font-size:12px">04</span><div class="h3" style="font-size:19px">Review exceptions, not everything.</div><p class="body" style="font-size:15px">Rates publish automatically and only outliers (more than 8% from the median) wait for a person.</p></div>
+<div class="dcard fadeup" style="--d:.12s"><span class="mono acc" style="font-size:12px">05</span><div class="h3" style="font-size:19px">Reuse before buying.</div><p class="body" style="font-size:15px">The stock check runs before an enquiry goes out. Surplus at one site becomes a transfer, with the cost moved between project budgets.</p></div>
+<div class="dcard fadeup" style="--d:.18s"><span class="mono acc" style="font-size:12px">06</span><div class="h3" style="font-size:19px">One system, four themes.</div><p class="body" style="font-size:15px">A single component library themed by a Portal variable mode: orange, blue, green and crimson accents from the same components.</p></div>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Outcomes"><div class="wrap">
+<span class="kicker">10 — Outcomes (targets)</span>
+<h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">What it should buy back<span class="acc">.</span></span></h2>
+<div class="grid4" style="margin-top:48px;gap:16px">
+<div class="metric fadeup"><div class="mnum">4<span class="acc">min</span></div><div class="kicker mt8">gate check-in (vs ~40 min of calls and paper)</div></div>
+<div class="metric fadeup" style="--d:.06s"><div class="mnum">3.4</div><div class="kicker mt8">quotes per enquiry</div></div>
+<div class="metric fadeup" style="--d:.12s"><div class="mnum">6.2<span class="acc">%</span></div><div class="kicker mt8">saved vs walk-in prices</div></div>
+<div class="metric fadeup" style="--d:.18s"><div class="mnum">0</div><div class="kicker mt8">unexplained stock differences at month end</div></div>
+</div>
+<p class="mono mut" style="font-size:11px;letter-spacing:.06em;margin-top:32px">Outcome figures are design targets from the prototype data, not measured results.</p>
+</div></section>
+<section class="sec" data-screen-label="Reflection"><div class="wrap grid2" style="gap:64px">
+<div><span class="kicker">11 — Reflection</span><h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">Designing the record, not the screen</span></h2></div>
+<div style="display:flex;flex-direction:column;gap:20px">
+<p class="body">The work on Truss was less about individual screens than about the thing underneath them: a shared order record, and a system of components that could show it five different ways without disagreeing with itself.</p>
+<p class="body">The hardest part was keeping those five views consistent down to the rupee. A rejection at the gate has to move a credit note, an invoice total, a project budget and a payout run — and each portal has to explain the change in its own language without changing the number.</p>
+<p class="body">What I'd test next: gate check-in on a real site tablet, where the network drops and hands are busy, and whether vendors trust the published market rate enough to quote against it.</p>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Next Project"><div class="wrap fx ac jb" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px">
+<div><span class="kicker">Next up</span><h2 class="disp rv" style="font-size:clamp(32px,4vw,56px);margin-top:12px"><span class="rvi">Servo<span class="acc">.</span></span></h2></div>
+<a class="btn" href="servo.html">Read the case study →</a>
+</div></section>
+<footer class="fx ac jb" style="padding:28px 64px;border-top:1px solid var(--line)" data-screen-label="Footer">
+<span class="fx ac gap8 mono mut fs12" style="font-size: 14px">©2026 akhilux</span>
+<img class="logoimg" src="assets/logo.svg" alt="akhilux" style="height: 28px; width: 70px; display: block"><a class="navlink" href="#top">Go back to top ↑</a>
+</footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#FF5600&quot;,&quot;options&quot;:[&quot;#FF5600&quot;,&quot;#C9F24E&quot;,&quot;#2F45FF&quot;,&quot;#E8E4DC&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;portalFilter&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;All portals&quot;,&quot;options&quot;:[&quot;All portals&quot;,&quot;Contractor&quot;,&quot;Vendor&quot;,&quot;Warehouse&quot;,&quot;Admin&quot;,&quot;Site app&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Timeline&quot;},&quot;stepNumbers&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Timeline&quot;}}">
+class Component extends DCLogic {
+  state = { menuOpen: false, light: localStorage.getItem('akhilux-theme') === 'light' };
+  updateBackLink() {
+    const el = document.getElementById('backlink');
+    if (el && /Works\.dc\.html/i.test(document.referrer)) { el.textContent = '← Back to Works'; el.setAttribute('href', 'works.html'); }
+  }
+  componentDidMount() {
+    this.updateBackLink();
+    this.applyAccent();
+    this.applyFilter();
+    document.documentElement.classList.toggle('light', this.state.light);
+    const reveal = () => {
+      const vh = window.innerHeight;
+      document.querySelectorAll('.rv:not(.in),.fadeup:not(.in)').forEach(el => {
+        if (el.getBoundingClientRect().top < vh * 0.92) el.classList.add('in');
+      });
+    };
+    requestAnimationFrame(reveal);
+    this.revealTimer = setInterval(reveal, 200);
+    const markScroll = () => {
+      document.querySelectorAll('.shot').forEach(sh => {
+        const frame = sh.closest('.webv');
+        if (!frame) return;
+        frame.classList.toggle('hasScroll', sh.scrollHeight - sh.clientHeight > 8);
+        if (!sh.dataset.scrollBound) {
+          sh.dataset.scrollBound = '1';
+          sh.addEventListener('scroll', () => {
+            const f = sh.closest('.webv');
+            if (f) f.classList.toggle('scrolled', sh.scrollTop > 6);
+          });
+        }
+      });
+    };
+    this.markScroll = markScroll;
+    markScroll();
+    this.shotTimer = setInterval(markScroll, 500);
+    setTimeout(() => clearInterval(this.shotTimer), 8000);
+    window.addEventListener('resize', markScroll);
+    let c = document.getElementById('om-cursor');
+    if (!c) {
+      c = document.createElement('div');
+      c.id = 'om-cursor';
+      c.className = 'cursordot';
+      document.body.appendChild(c);
+    }
+    this.cursorEl = c;
+    this.cursorMove = e => {
+      c.style.left = e.clientX + 'px';
+      c.style.top = e.clientY + 'px';
+      const t = e.target instanceof Element ? e.target : null;
+      c.classList.toggle('hov', !!(t && t.closest('a,button,input,textarea,.inp')));
+    };
+    document.addEventListener('mousemove', this.cursorMove);
+    this.editChk = () => {
+      const ae = document.activeElement;
+      const editing = !!(ae && ae.closest && ae.closest('[contenteditable], input, textarea'));
+      document.documentElement.classList.toggle('om-editing', editing);
+    };
+    document.addEventListener('focusin', this.editChk);
+    this.editChkOut = () => setTimeout(this.editChk, 0);
+    document.addEventListener('focusout', this.editChkOut);
+    try { if (window.top !== window.self) document.documentElement.classList.add('om-host'); } catch (e) { document.documentElement.classList.add('om-host'); }
+  }
+  componentWillUnmount() {
+    document.removeEventListener('focusin', this.editChk);
+    document.removeEventListener('focusout', this.editChkOut);
+    if (this.revealTimer) clearInterval(this.revealTimer);
+    if (this.shotTimer) clearInterval(this.shotTimer);
+    if (this.markScroll) window.removeEventListener('resize', this.markScroll);
+    if (this.cursorMove) document.removeEventListener('mousemove', this.cursorMove);
+    if (this.cursorEl) this.cursorEl.remove();
+  }
+  componentDidUpdate() {
+    this.applyAccent();
+    this.applyFilter();
+    document.documentElement.classList.toggle('light', this.state.light);
+  }
+  applyAccent() {
+    document.documentElement.style.setProperty('--acc', this.props.accent ?? '#FF5600');
+  }
+  applyFilter() {
+    const f = this.props.portalFilter ?? 'All portals';
+    const showNums = this.props.stepNumbers ?? true;
+    document.querySelectorAll('#timeline .step').forEach(el => {
+      el.style.display = (f === 'All portals' || el.getAttribute('data-portal') === f) ? '' : 'none';
+      const n = el.querySelector('.snum');
+      if (n) n.style.visibility = showNums ? 'visible' : 'hidden';
+    });
+  }
+  renderVals() {
+    return {
+      menuCls: this.state.menuOpen ? 'open' : '',
+      openMenu: () => this.setState({ menuOpen: true }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      themeLabel: this.state.light ? 'Switch to dark mode' : 'Switch to light mode',
+      toggleTheme: () => this.setState(s => {
+        const light = !s.light;
+        localStorage.setItem('akhilux-theme', light ? 'light' : 'dark');
+        return { light };
+      })
+    };
+  }
+}
+
+</script>
+</body>
+</html>

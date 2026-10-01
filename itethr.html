@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<script src="loader.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<script src="./smooth-scroll.js"></script>
+<script src="./image-slot.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Bai+Jamjuree:wght@400;500;600;700&family=Mulish:wght@400;600;700&family=DM+Sans:wght@400;500;700&family=Kumbh+Sans:wght@500;600;700&family=Hind+Madurai:wght@400;700&family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mekbuddy/fig-assets.css">
+<link rel="stylesheet" href="mekbuddy/fig-tokens.css">
+<style>
+:root{--acc:#00A3A3;--bg:#0F0E0C;--sur:#171512;--line:#2A2723;--ink:#ECE8E0;--mut:#8F8A80}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Archivo',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--ink);text-decoration:none}a:hover{color:var(--acc)}
+.disp{font-family:'Anton',sans-serif;text-transform:uppercase;letter-spacing:.01em;line-height:.95;margin:0}
+.mono{font-family:'JetBrains Mono',monospace}
+.mut{color:var(--mut)}
+.acc{color:var(--acc)}
+.sec{padding:100px 64px;border-top:1px solid var(--line)}
+.wrap{max-width:1180px;margin:0 auto}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut)}
+.h2{font-size:clamp(40px,5.5vw,76px)}
+.tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:6px 12px;white-space:nowrap}
+.tag.hl{color:#0F0E0C;background:var(--acc);border-color:var(--acc)}
+.card{border:1px solid var(--line);border-radius:20px;background:var(--sur);padding:28px}
+.body{font-size:17px;line-height:1.7;color:var(--mut);margin:0}
+.body strong{color:var(--ink);font-weight:600}
+.navlink{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.navlink:hover{color:var(--acc)}
+.figpill{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:7px 13px;white-space:nowrap;transition:border-color .2s,color .2s}
+.figpill:hover{border-color:var(--acc);color:var(--acc)}
+.figpill.soon{color:var(--mut);border-style:dashed;pointer-events:none}
+@media (max-width:700px){.figpill{display:none}}
+.figbtn{display:none}
+@media (max-width:700px){.figbtn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;box-sizing:border-box;margin-top:40px;padding:16px 20px;border-radius:999px;background:var(--acc);color:#0F0E0C;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:500}}
+.h3{font-size:24px;font-weight:700;margin:0}
+.metric{border-top:1px solid var(--line);padding:20px 0}
+.mnum{font-family:'Anton',sans-serif;font-size:52px;line-height:1}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.quote{font-size:20px;line-height:1.5;font-weight:500;margin:0;border-left:2px solid var(--acc);padding-left:20px}
+.rv{display:block;overflow:hidden}
+.rvi{display:inline-block;transform:translateY(115%);transition:transform .9s cubic-bezier(.16,1,.3,1);transition-delay:var(--d,0s)}
+.rv.in .rvi{transform:translateY(0)}
+.fadeup{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .8s cubic-bezier(.16,1,.3,1);transition-delay:var(--d,0s)}
+.fadeup.in{opacity:1;transform:translateY(0)}
+.webv{width:100%;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--sur);box-shadow:0 20px 48px -14px rgba(0,0,0,.42),0 6px 16px -10px rgba(0,0,0,.3)}
+.shot{aspect-ratio:16/10;width:100%;overflow-y:auto;overflow-x:hidden;background:var(--sur)}
+.shot img,.ph img{width:100%;height:auto;display:block}
+.webv{position:relative}
+.webv.hasScroll::after{content:'';position:absolute;left:1px;right:1px;bottom:1px;height:72px;border-radius:0 0 13px 13px;background:linear-gradient(to top,rgba(245,241,236,.96),rgba(245,241,236,0));pointer-events:none;transition:opacity .35s}
+.webv.hasScroll::before{content:'↕ scroll';position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:2;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#111;background:#F5F1EC;border:1px solid #D3CEC6;border-radius:999px;padding:5px 11px;pointer-events:none;transition:opacity .35s}
+.webv.scrolled::before,.webv.scrolled::after{opacity:0}
+.phs{width:100%;aspect-ratio:442/956;border-radius:28px;overflow:hidden;border:1px solid var(--line);background:var(--sur);box-shadow:0 20px 48px -14px rgba(0,0,0,.42),0 6px 16px -10px rgba(0,0,0,.3)}
+.phlabel{text-align:center;margin-top:18px}
+.phlabel .t{font-weight:700;font-size:15px}
+.phlabel .s{color:var(--mut);font-size:13px;margin-top:4px;line-height:1.5}
+.phgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(256px,1fr));gap:32px;justify-items:center}
+.phv{width:254px;height:551px;border-radius:26px;border:1px solid var(--line);overflow:hidden;box-shadow:0 20px 48px -14px rgba(0,0,0,.42),0 6px 16px -10px rgba(0,0,0,.3);margin:0 auto;background:#fff}
+.phin{width:402px;height:874px;transform:scale(.6318);transform-origin:0 0}
+.av{border-radius:50%;flex-shrink:0}
+.av1{background:linear-gradient(135deg,#FF9A4D,#E05C2A)}
+.av2{background:linear-gradient(135deg,#6C9BC0,#84C0A8)}
+.av3{background:linear-gradient(135deg,#E36A64,#8C2A2A)}
+.persona{border:1px solid var(--line);border-radius:20px;background:var(--sur);padding:28px;display:flex;flex-direction:column;gap:16px}
+.ptop{display:flex;align-items:center;gap:16px}
+.plist{margin:0;padding-left:18px;color:var(--mut);font-size:14px;line-height:1.8}
+.goal{display:flex;gap:14px;align-items:start}
+.gnum{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--acc);padding-top:3px}
+.ba{display:grid;grid-template-columns:minmax(0,1fr) 40px minmax(0,1fr);gap:20px;align-items:center;padding:24px 0;border-top:1px solid var(--line)}
+.ba:last-child{border-bottom:1px solid var(--line)}
+.bcell{font-size:15px;line-height:1.6}
+.arr{color:var(--acc);font-size:20px;text-align:center}
+.swatch{border-radius:16px;height:96px;border:1px solid var(--line);display:flex;align-items:flex-end;padding:12px;box-sizing:border-box}
+.swl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em}
+.typerow{display:flex;align-items:baseline;justify-content:space-between;gap:16px;border-top:1px solid var(--line);padding:18px 0}
+.typerow:last-child{border-bottom:1px solid var(--line)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 22px;border:1px solid var(--ink);border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;background:none;color:var(--ink);transition:all .2s}
+.btn:hover{background:var(--acc);border-color:var(--acc);color:#0F0E0C}
+.navbar{background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(12px)}
+.dotsbtn{width:46px;height:46px;border-radius:50%;border:none;background:transparent;display:grid;place-items:center;transition:background .25s}
+.dotsbtn:hover{background:var(--sur)}
+.dgrid{display:grid;grid-template-columns:3px 3px;gap:9px;transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+.dotsbtn:hover .dgrid{transform:rotate(45deg)}
+.d{width:3px;height:3px;border-radius:50%;background:var(--ink)}
+.menu{position:fixed;inset:0;background:var(--bg);z-index:50;display:flex;flex-direction:column;justify-content:space-between;padding:24px 64px;box-sizing:border-box;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s}
+.menu.open{opacity:1;visibility:visible}
+.mline{overflow:hidden;text-align:center;padding:0 30px}
+.mlink{display:inline-block;font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(56px,8.5vw,110px);line-height:1.02;color:var(--ink);transform:translateY(110%);transition:transform .25s ease,color .2s;position:relative}
+.roll{display:block;position:relative;transition:transform .55s cubic-bezier(.22,1,.36,1)}
+.rt2{position:absolute;top:100%;left:0;width:100%}
+.mlink:hover .roll{transform:translateY(-100%)}
+.msup{font-family:'JetBrains Mono',monospace;font-size:14px;position:absolute;top:10px;left:-26px;color:var(--ink);opacity:0;transition:opacity .25s}
+.mlink:hover .msup{opacity:1}
+.menu.open .mline:nth-child(1) .mlink{transition-delay:.2s}
+.menu.open .mline:nth-child(2) .mlink{transition-delay:.28s}
+.menu.open .mline:nth-child(3) .mlink{transition-delay:.36s}
+.menu.open .mlink{transform:translateY(0);transition:transform .7s cubic-bezier(.16,1,.3,1),color .2s}
+.xbtn{width:46px;height:46px;border-radius:50%;border:none;background:var(--sur);color:var(--ink);display:grid;place-items:center;font-size:16px;transition:transform .3s}
+.xbtn:hover{transform:rotate(90deg)}
+html.light{--bg:#EFEDE9;--sur:#FFFFFF;--line:#D8D4CB;--ink:#131210;--mut:#7A756B}
+html.light .logoimg{filter:invert(1)}
+html.light .phv{box-shadow:0 26px 60px -20px rgba(28,28,38,.16),0 8px 20px -12px rgba(28,28,38,.1)}
+.cover-light{display:none}
+html.light .cover-dark{display:none}
+html.light .cover-light{display:block}
+@media (pointer:fine){*{cursor:none !important}}
+.cursordot{display:none !important}
+@media (pointer:fine){.cursordot{display:flex !important}}
+html.om-editing, html.om-editing *{cursor:auto !important}
+html.om-editing .cursordot{display:none !important}
+html.om-host, html.om-host *{cursor:auto !important}
+html.om-host .cursordot{display:none !important}
+.cursordot{position:fixed;left:-100px;top:-100px;z-index:2147483647;pointer-events:none;width:14px;height:14px;border-radius:999px;background:#fff;mix-blend-mode:difference;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;transition:width .3s cubic-bezier(.22,1,.36,1),height .3s cubic-bezier(.22,1,.36,1),background .2s}
+.cursordot.hov{width:36px;height:36px}
+@media (max-width:920px){
+.sec{padding:72px 24px}
+.navbar{padding:14px 24px !important}
+.navbar .navlink{font-size:11px}
+.menu{padding:20px 24px}
+.menu .btn{padding:10px 16px;font-size:11px}
+.menu>.fx.jb{flex-direction:column;gap:16px;align-items:center}
+.msup{display:none}
+header.wrap[style]{padding:80px 24px 56px !important}
+.wrap>.grid2,.wrap.grid2,.grid2{grid-template-columns:1fr !important}
+.grid3{grid-template-columns:1fr !important}
+.grid4{grid-template-columns:1fr 1fr !important}
+.grid2[style*="64px"],.wrap.grid2[style]{gap:40px !important}
+.ba{grid-template-columns:1fr !important;gap:12px}
+.arr{transform:rotate(90deg)}
+footer{flex-wrap:wrap;gap:14px;padding:24px 24px !important;justify-content:center !important}
+}
+@media (max-width:600px){
+.grid4{grid-template-columns:1fr !important}
+.mnum{font-size:40px}
+.screengrid{grid-template-columns:repeat(2,1fr) !important;gap:22px 14px !important}
+}
+
+.phs{width:100%;aspect-ratio:442/956;border-radius:30px;overflow:hidden;border:1px solid var(--line);background:var(--sur);box-shadow:0 30px 60px -26px rgba(10,26,31,.24),0 10px 24px -16px rgba(10,26,31,.14)}
+.phrow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.exp{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr);gap:56px;align-items:center;padding:72px 0;border-top:1px solid var(--line)}
+.exp:first-of-type{border-top:none;padding-top:40px}
+.enum{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--acc);letter-spacing:.12em}
+.h3x{font-size:clamp(26px,2.6vw,34px);font-weight:700;letter-spacing:-.02em;margin:12px 0 16px;line-height:1.1}
+.cover{container-type:inline-size;width:100%;aspect-ratio:2/1;border-radius:24px;border:1px solid var(--line);background:#F9F9F9;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.lockup{display:flex;align-items:center;gap:5.5cqw}
+.lmark{position:relative;width:20.66cqw;aspect-ratio:396.6/340.3}
+.lmark i{position:absolute;border-radius:50%;background:#008080;display:block}
+.lword{font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:18.3cqw;line-height:.8;color:#008080;letter-spacing:-.01em}
+.ia{border:1px solid var(--line);border-radius:24px;background:var(--sur);padding:40px;display:flex;flex-direction:column;gap:36px}
+.iarow{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.node{border:1px solid var(--line);background:var(--bg);border-radius:14px;padding:12px 18px;font-weight:700;font-size:16px;white-space:nowrap}
+.node.b{background:#008080;border-color:#008080;color:#fff}
+.node small{display:block;font-weight:400;font-size:12px;color:var(--mut);margin-top:2px}
+.node.b small{color:#E6F2F2}
+.iarr{color:var(--acc);font-size:18px}
+.rooms{display:flex;gap:8px;flex-wrap:wrap}
+.room{font-family:'JetBrains Mono',monospace;font-size:12px;border:1px dashed var(--acc);color:var(--acc);border-radius:999px;padding:7px 12px}
+.strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.tok{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:14px}
+.tok b{font-family:'JetBrains Mono',monospace;font-weight:400;font-size:12px;color:var(--mut);margin-left:auto}
+.chip{width:28px;height:28px;border-radius:8px;border:1px solid rgba(0,0,0,.08);flex-shrink:0}
+.ts{display:flex;align-items:baseline;justify-content:space-between;gap:16px;border-top:1px solid var(--line);padding:12px 0}
+.comp{display:flex;flex-wrap:wrap;gap:8px}
+@media (max-width:920px){.exp{grid-template-columns:1fr;gap:32px;padding:56px 0}.ia{padding:24px}}
+@media (max-width:600px){.phrow,.strip{grid-template-columns:repeat(3,68%);overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px}.phrow>*,.strip>*{scroll-snap-align:start}.iarow{flex-direction:column;align-items:flex-start}.iarr{transform:rotate(90deg)}}
+</style>
+</helmet>
+<nav class="grid ac navbar" style="grid-template-columns:1fr auto 1fr;padding:20px 64px;position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line)" data-screen-label="Nav">
+<a href="index.html" class="fx ac" style="justify-self:start"><img class="logoimg" src="assets/logo.svg" alt="akhilux" style="height:36px;width:auto;display:block"></a>
+<button class="dotsbtn" onClick="{{ openMenu }}" aria-label="Open menu"><span class="dgrid"><span class="d"></span><span class="d"></span><span class="d"></span><span class="d"></span></span></button>
+<div style="display:flex;align-items:center;gap:16px;justify-self:end"><a class="navlink" id="backlink" href="index.html">← Back home</a><a class="figpill soon" href="#">Figma link soon</a></div>
+</nav>
+<div class="menu {{ menuCls }}" data-screen-label="Fullscreen Menu">
+<div class="grid ac" style="grid-template-columns:1fr auto 1fr">
+<img class="logoimg" src="assets/logo.svg" alt="akhilux" style="height:36px;width:auto;justify-self:start">
+<button class="xbtn" onClick="{{ closeMenu }}" aria-label="Close menu">✕</button>
+<button class="btn" onClick="{{ toggleTheme }}" style="padding:12px 22px;justify-self:end">{{ themeLabel }}</button>
+</div>
+<div class="col" style="display:flex;flex-direction:column;align-items:center;gap:4px">
+<div class="mline"><a class="mlink" href="index.html"><span class="msup">(1)</span><span class="roll"><span>Home</span><span class="rt2">Home</span></span></a></div>
+<div class="mline"><a class="mlink" href="works.html"><span class="msup">(2)</span><span class="roll"><span>Works</span><span class="rt2">Works</span></span></a></div>
+<div class="mline"><a class="mlink" href="index.html#contact"><span class="msup">(3)</span><span class="roll"><span>Contact</span><span class="rt2">Contact</span></span></a></div>
+</div>
+<div class="fx ac jb">
+<span class="mono mut fs12" style="letter-spacing:.14em">©2026 ALL RIGHTS RESERVED</span>
+<div class="fx ac gap24"><a class="navlink" href="https://www.instagram.com/akhilu.ash/" target="_blank">Instagram ↗</a><a class="navlink" href="https://www.linkedin.com/in/akhiljith-ashok/" target="_blank">LinkedIn ↗</a><a class="navlink" href="https://www.behance.net/akhiljithashok" target="_blank">Behance ↗</a></div>
+</div>
+</div>
+<header class="wrap" style="padding:110px 64px 80px" data-screen-label="Case Study Hero">
+<div class="fx gap8 wrap" style="flex-wrap:wrap;margin-bottom:28px"><span class="tag hl">UI/UX Case Study</span><span class="tag">iOS App</span><span class="tag">Freelance</span><span class="tag">Community platform</span></div>
+<h1 class="disp rv" style="font-size:clamp(56px,8.5vw,136px)"><span class="rvi" style="--d:.1s">iTethr<span class="acc">.</span></span></h1>
+<p class="body" style="max-width:720px;margin-top:28px;font-size:19px">A community platform where international students find their people, powered by bubbles instead of tabs.</p>
+<div class="grid4" style="margin-top:56px">
+<div><div class="kicker">Client</div><div class="fw6 mt8" style="font-size:15px">AeonovX SIA · Riga, Latvia</div></div>
+<div><div class="kicker">Role</div><div class="fw6 mt8" style="font-size:15px">Freelance UI/UX Designer</div></div>
+<div><div class="kicker">Timeline</div><div class="fw6 mt8" style="font-size:15px">2025 · System restructure 2026</div></div>
+<div><div class="kicker">Platform</div><div class="fw6 mt8" style="font-size:15px">iOS · Light &amp; Dark</div></div>
+</div>
+<img class="fadeup" src="assets/itethr-cover.webp" alt="iTethr app screens showcase" style="width:100%;aspect-ratio:8/5;object-fit:cover;border-radius:24px;border:1px solid var(--line);margin-top:56px;display:block">
+</header>
+<section class="sec" data-screen-label="Overview"><div class="wrap grid2" style="gap:64px">
+<div><span class="kicker">01 — Overview</span><h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">One place for your people<span class="acc">.</span></span></h2></div>
+<div class="col" style="display:flex;flex-direction:column;gap:20px">
+<p class="body">iTethr is a community platform for <strong>international students, organisations, creators and global users</strong>. People build structured communities, offer services and connect through real-time social tools.</p>
+<p class="body">An in-house AI assistant, <strong>Aeono</strong>, runs through the product: in search, in chat and in the marketplace.</p>
+<p class="body">I designed the iOS app end to end for <strong>AeonovX SIA</strong>, a product company in Riga: product and interaction design, the design system and developer handoff.</p>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Challenge"><div class="wrap">
+<div class="grid2" style="gap:64px">
+<div><span class="kicker">02 — The challenge</span><h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">Feeds and tab bars everywhere<span class="acc">.</span></span></h2></div>
+<p class="body">Social and community apps feel like endless feeds and tab bars. International students especially struggle to find their people, whether that’s university departments, local communities or trusted services, in one place. Institutions also lack a structured way to run many sub-communities under one roof.</p>
+</div>
+<div class="grid3" style="margin-top:56px">
+<div class="card fadeup" style="display:flex;flex-direction:column;gap:10px"><span class="gnum">G1</span><div class="h3" style="font-size:22px;font-weight:700">Make Home feel alive, not like a list</div></div>
+<div class="card fadeup" style="display:flex;flex-direction:column;gap:10px"><span class="gnum">G2</span><div class="h3" style="font-size:22px;font-weight:700">Give institutions real structure</div></div>
+<div class="card fadeup" style="display:flex;flex-direction:column;gap:10px"><span class="gnum">G3</span><div class="h3" style="font-size:22px;font-weight:700">Build trust between strangers</div></div>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Information Architecture"><div class="wrap">
+<span class="kicker">03 — Information architecture</span>
+<h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">From Home to the room<span class="acc">.</span></span></h2>
+<p class="body" style="max-width:680px;margin-top:20px">Every community follows the same nesting. The “i/” prefix means “inside” and doubles as brand language.</p>
+<div class="ia fadeup" style="margin-top:48px">
+<div><div class="kicker" style="margin-bottom:16px">Standard</div>
+<div class="iarow"><div class="node b">Home<small>Bubble view</small></div><span class="iarr">→</span><div class="node">Spaces<small>Home · Favorites · Global · Custom</small></div><span class="iarr">→</span><div class="node">Community</div><span class="iarr">→</span><div class="node">Hub<small>Folder</small></div><span class="iarr">→</span><div class="rooms"><span class="room">i/chat</span><span class="room">i/talk</span><span class="room">i/store</span><span class="room">i/forum</span></div></div></div>
+<div style="border-top:1px solid var(--line);padding-top:32px"><div class="kicker" style="margin-bottom:16px">Institutions</div>
+<div class="iarow"><div class="node b">Community Pro<small>Business Profiles only</small></div><span class="iarr">→</span><div class="node">i/Communities<small>e.g. university departments</small></div><span class="iarr">→</span><div class="node">Hub</div><span class="iarr">→</span><div class="rooms"><span class="room">i/rooms</span></div></div>
+<div class="iarow" style="margin-top:14px"><div class="node">Board members</div><span class="iarr">↔</span><div class="node">Admin bridge</div><span class="iarr">↔</span><div class="node">Department admins</div></div></div>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Key Experiences"><div class="wrap">
+<span class="kicker">04 — Key experiences</span>
+<h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">How it works<span class="acc">.</span></span></h2>
+<div class="exp"><div><div class="enum">01</div><h3 class="h3x">A Home without a tab bar</h3><p class="body">Floating, animated bubbles stand for communities and connections, so Home feels spatial and present. The Aeono AI search bar sits at the bottom, iFeed is top-left, and Marketplace and Notifications are top-right.</p></div><div class="phrow"><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-home" shape="rect" placeholder="02.01 · Home"></image-slot></div><figcaption class="phlabel"><div class="t">Home</div></figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-ifeed" shape="rect" placeholder="05.01 · iFeed - Feed"></image-slot></div><figcaption class="phlabel"><div class="t">iFeed</div></figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-loops" shape="rect" placeholder="05.02 · iFeed - Loops"></image-slot></div><figcaption class="phlabel"><div class="t">Loops</div></figcaption></figure></div></div>
+<div class="exp"><div><div class="enum">02</div><h3 class="h3x">Spaces</h3><p class="body">Swipe between Home, Favorites, Global and custom Spaces such as “Study Room” or “Startup Notes”. Long-press any bubble for quick actions.</p></div><div class="phrow"><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-newspace" shape="rect" placeholder="02.02 · New Space"></image-slot></div><figcaption class="phlabel"><div class="t">New Space</div></figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-favs" shape="rect" placeholder="02.03 · Favorites"></image-slot></div><figcaption class="phlabel"><div class="t">Favorites</div></figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-longpress" shape="rect" placeholder="02.06 · Long Press Menu / Space"></image-slot></div><figcaption class="phlabel"><div class="t">Long press</div></figcaption></figure></div></div>
+<div class="exp"><div><div class="enum">03</div><h3 class="h3x">Structured communities</h3><p class="body">A community holds Hubs, and each Hub holds i/ Rooms for chat, voice, a store and a forum. Members always know where a conversation lives.</p></div><div class="phrow"><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-comm" shape="rect" placeholder="07.01 · Community - Half Page - Default"></image-slot></div><figcaption class="phlabel"><div class="t">Community</div></figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-italk" shape="rect" placeholder="07.06 · Community - i/Talk - Join"></image-slot></div><figcaption class="phlabel"><div class="t">i/Talk</div></figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-hub" shape="rect" placeholder="07.20 · Create Hub"></image-slot></div><figcaption class="phlabel"><div class="t">Create Hub</div></figcaption></figure></div></div>
+<div class="exp"><div><div class="enum">04</div><h3 class="h3x">Community Pro &amp; i/Communities</h3><p class="body">For institutions such as a university with departments. Board members send targeted announcements that cascade to departments, and an admin bridge connects board and department admins.</p></div><div class="phrow"><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-pro" shape="rect" placeholder="08.01 · Community Pro - Half Page - Default"></image-slot></div><figcaption class="phlabel"><div class="t">Community Pro</div></figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-announce" shape="rect" placeholder="08.21 · Create Announcement · Distribution"></image-slot></div><figcaption class="phlabel"><div class="t">Announcement</div></figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-bridge" shape="rect" placeholder="08.22 · Admin Bridge"></image-slot></div><figcaption class="phlabel"><div class="t">Admin bridge</div></figcaption></figure></div></div>
+<div class="exp"><div><div class="enum">05</div><h3 class="h3x">Aeono AI throughout</h3><p class="body">Conversational search with a choice of model, and smart reminders detected from chat, such as “meeting at 10pm”.</p></div><div class="phrow"><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-ai" shape="rect" placeholder="03.06 · AI Search"></image-slot></div><figcaption class="phlabel"><div class="t">AI search</div></figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-airesult" shape="rect" placeholder="03.07 · AI Search / Result"></image-slot></div><figcaption class="phlabel"><div class="t">Result</div></figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-reminder" shape="rect" placeholder="06.17 · Smart Reminder · Detected"></image-slot></div><figcaption class="phlabel"><div class="t">Smart reminder</div></figcaption></figure></div></div>
+<div class="exp"><div><div class="enum">06</div><h3 class="h3x">Tethr connections &amp; trust</h3><p class="body">Connections are mutual and consent-based instead of follow and follow-back. Profiles show a Trust Score, Tethrd level and verification badges for Students, Freelancers and Professionals.</p></div><div class="phrow"><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-profile" shape="rect" placeholder="04.01 · Profile"></image-slot></div><figcaption class="phlabel"><div class="t">Profile</div></figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-business" shape="rect" placeholder="04.21 · Business Profile"></image-slot></div><figcaption class="phlabel"><div class="t">Business Profile</div></figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-verify" shape="rect" placeholder="04.22 · Get Verified · Badge Request"></image-slot></div><figcaption class="phlabel"><div class="t">Get verified</div></figcaption></figure></div></div>
+<div class="exp"><div><div class="enum">07</div><h3 class="h3x">Marketplace</h3><p class="body">Services, rentals, events and AI tools &amp; agents, found by category and reached by DM or external link. Payments and reviews were deliberately left out of V1.</p></div><div class="phrow"><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-market" shape="rect" placeholder="09.01 · Marketplace - Home"></image-slot></div><figcaption class="phlabel"><div class="t">Marketplace</div></figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-listing" shape="rect" placeholder="09.02 · Listing Detail · Service"></image-slot></div><figcaption class="phlabel"><div class="t">Listing</div></figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-agents" shape="rect" placeholder="09.04 · AI Tools & Agents"></image-slot></div><figcaption class="phlabel"><div class="t">AI tools &amp; agents</div></figcaption></figure></div></div>
+</div></section>
+<section class="sec" data-screen-label="Onboarding"><div class="wrap">
+<div class="grid2" style="gap:64px">
+<div><span class="kicker">05 — Onboarding</span><h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">Three steps in<span class="acc">.</span></span></h2></div>
+<p class="body">Username, then date of birth and gender, then interests and privacy. New users land in Home with their personal “You” chat.</p>
+</div>
+<div class="kicker" style="margin:56px 0 20px">Light</div>
+<div class="strip"><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-ob-1" shape="rect" placeholder="01.05 · Username"></image-slot></div><figcaption class="phlabel"><div class="t">1 · Username</div></figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-ob-2" shape="rect" placeholder="01.07 · DOB & Gender"></image-slot></div><figcaption class="phlabel"><div class="t">2 · DOB &amp; Gender</div></figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-ob-3" shape="rect" placeholder="01.08 · Interests"></image-slot></div><figcaption class="phlabel"><div class="t">3 · Interests</div></figcaption></figure></div>
+<div class="kicker" style="margin:48px 0 20px">Dark</div>
+<div class="strip"><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-ob-1d" shape="rect" placeholder="01.17 · Username · Dark"></image-slot></div><figcaption class="phlabel"><div class="t">1 · Username</div></figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-ob-2d" shape="rect" placeholder="01.19 · DOB & Gender · Dark"></image-slot></div><figcaption class="phlabel"><div class="t">2 · DOB &amp; Gender</div></figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:4px"><div class="phs fadeup"><image-slot id="itr-ob-3d" shape="rect" placeholder="01.20 · Interests · Dark"></image-slot></div><figcaption class="phlabel"><div class="t">3 · Interests</div></figcaption></figure></div>
+</div></section>
+<section class="sec" data-screen-label="Design System"><div class="wrap">
+<span class="kicker">06 — Design system</span>
+<h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">Every colour is a variable<span class="acc">.</span></span></h2>
+<div class="grid4" style="margin-top:48px">
+<div class="card fadeup"><div class="kicker">Primitives</div><p class="body mt8" style="font-size:15px">The full palette</p></div>
+<div class="card fadeup"><div class="kicker">Theme</div><p class="body mt8" style="font-size:15px">Semantic tokens with Light and Dark modes</p></div>
+<div class="card fadeup"><div class="kicker">Dimensions</div><p class="body mt8" style="font-size:15px">Spacing, radius and sizes</p></div>
+<div class="card fadeup"><div class="kicker">Typography</div><p class="body mt8" style="font-size:15px">Family, weights and sizes</p></div>
+</div>
+<div class="grid2" style="margin-top:56px;gap:48px">
+<div class="fadeup">
+<div class="grid2" style="gap:24px">
+<div><div class="kicker" style="margin-bottom:10px">Light</div>
+<div class="tok"><span class="chip" style="background:#FBFAF9"></span>bg/canvas<b>#FBFAF9</b></div>
+<div class="tok"><span class="chip" style="background:#FFFFFF"></span>bg/surface<b>#FFFFFF</b></div>
+<div class="tok"><span class="chip" style="background:#008080"></span>brand/primary<b>#008080</b></div>
+<div class="tok"><span class="chip" style="background:#0A1A1F"></span>text/heading<b>#0A1A1F</b></div>
+<div class="tok"><span class="chip" style="background:#666666"></span>text/secondary<b>#666666</b></div>
+</div>
+<div><div class="kicker" style="margin-bottom:10px">Dark</div>
+<div class="tok"><span class="chip" style="background:#1A1D1F"></span>bg/canvas<b>#1A1D1F</b></div>
+<div class="tok"><span class="chip" style="background:#2C3942"></span>bg/surface<b>#2C3942</b></div>
+<div class="tok"><span class="chip" style="background:#00A3A3"></span>brand/primary<b>#00A3A3</b></div>
+<div class="tok"><span class="chip" style="background:#FFFFFF"></span>text/heading<b>#FFFFFF</b></div>
+<div class="tok"><span class="chip" style="background:#8A8A8F"></span>text/secondary<b>#8A8A8F</b></div>
+</div>
+</div>
+<p class="body" style="margin-top:28px;font-size:15px">Dark screens are the same layouts with the Theme mode switched. The base screen template changes its background with the mode.</p>
+</div>
+<div class="fadeup">
+<div class="kicker" style="margin-bottom:10px">Type scale · Avenir Next</div>
+<div class="ts"><span style="font-size:28px;font-weight:700">Heading / H1</span><span class="kicker">28 Demi</span></div>
+<div class="ts"><span style="font-size:24px;font-weight:700">Heading / H2</span><span class="kicker">24 Demi</span></div>
+<div class="ts"><span style="font-size:20px;font-weight:700">Heading / H3</span><span class="kicker">20 Demi</span></div>
+<div class="ts"><span style="font-size:16px;font-weight:700">Title / Medium</span><span class="kicker">16 Demi</span></div>
+<div class="ts"><span style="font-size:16px">Body / Medium</span><span class="kicker">16 Regular</span></div>
+<div class="ts"><span style="font-size:14px;font-weight:700">Label / Medium</span><span class="kicker">14 Demi</span></div>
+<div class="ts" style="border-bottom:1px solid var(--line)"><span style="font-size:12px">Caption / Regular</span><span class="kicker">12 Regular</span></div>
+</div>
+</div>
+<div class="grid3" style="margin-top:56px">
+<div class="metric fadeup"><div class="mnum acc">45</div><div class="mut mt8" style="font-size:15px">Components with variants and properties</div></div>
+<div class="metric fadeup"><div class="mnum">~300</div><div class="mut mt8" style="font-size:15px">Design tokens across 4 variable collections</div></div>
+<div class="metric fadeup"><div class="mnum">15 · 10 · 7</div><div class="mut mt8" style="font-size:15px">Text styles · effect styles · bubble gradients</div></div>
+</div>
+<div class="comp fadeup" style="margin-top:32px"><span class="tag">Buttons</span><span class="tag">Inputs</span><span class="tag">Chips</span><span class="tag">Icon buttons</span><span class="tag">Nav header</span><span class="tag">AI bottom bar</span><span class="tag hl">Community bubble</span><span class="tag">Avatars</span><span class="tag">Status pills</span><span class="tag">List rows</span><span class="tag">Chat bubbles</span><span class="tag">Cards</span><span class="tag">Sheets</span><span class="tag">Dialogs</span><span class="tag">Base screen</span></div>
+<p class="body fadeup" style="max-width:720px;margin-top:24px;font-size:15px">The community bubble has five states: Standard, Pro ring, Private, Pending and Admin. Effect styles cover soft shadows and glass blurs, and the seven bubble gradients are Aurora, Orchid, Sunset, Ember, Mint, Lime and Lagoon.</p>
+</div></section>
+<section class="sec" data-screen-label="Light and Dark"><div class="wrap">
+<span class="kicker">07 — Light &amp; Dark</span>
+<h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">Same layout, both modes<span class="acc">.</span></span></h2>
+<div class="grid3" style="margin-top:56px;gap:40px 32px">
+<div><div class="grid2" style="gap:14px"><div class="phs fadeup"><image-slot id="itr-ld-home-l" shape="rect" placeholder="02.01 · Home"></image-slot></div><div class="phs fadeup"><image-slot id="itr-ld-home-d" shape="rect" placeholder="02.08 · Home · Dark"></image-slot></div></div><div class="phlabel"><div class="t">Home</div></div></div>
+<div><div class="grid2" style="gap:14px"><div class="phs fadeup"><image-slot id="itr-ld-chat-l" shape="rect" placeholder="06.18 · You · Personal Space"></image-slot></div><div class="phs fadeup"><image-slot id="itr-ld-chat-d" shape="rect" placeholder="06.18 · You · Personal Space · Dark"></image-slot></div></div><div class="phlabel"><div class="t">You space</div></div></div>
+<div><div class="grid2" style="gap:14px"><div class="phs fadeup"><image-slot id="itr-ld-prof-l" shape="rect" placeholder="04.01 · Profile"></image-slot></div><div class="phs fadeup"><image-slot id="itr-ld-prof-d" shape="rect" placeholder="04.11 · Profile · Dark"></image-slot></div></div><div class="phlabel"><div class="t">Profile</div></div></div>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Outcome"><div class="wrap grid2" style="gap:64px">
+<div><span class="kicker">08 — Outcome &amp; reflection</span><h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">What shipped<span class="acc">.</span></span></h2>
+<ul class="plist" style="font-size:16px;margin-top:28px;color:var(--ink)"><li>10 complete user flows, ~150 screens in Light and Dark</li><li>A scalable system: 45 components, ~300 tokens</li><li>A dev-ready file organised by flow, with numbered screens</li></ul></div>
+<div class="col" style="display:flex;flex-direction:column;gap:26px">
+<div class="goal fadeup"><span class="gnum">L1</span><p class="body"><strong>Spatial UI needs clear anchors.</strong> Bubbles make Home feel alive, but fixed positions for search, iFeed and notifications are what keep it usable.</p></div>
+<div class="goal fadeup"><span class="gnum">L2</span><p class="body"><strong>Structure pays off at scale.</strong> Community → Hub → i/Room gave every new feature, from Community Pro to the admin bridge, an obvious home.</p></div>
+<div class="goal fadeup"><span class="gnum">L3</span><p class="body"><strong>Theme tokens early.</strong> Binding every colour to a semantic variable made dark mode a mode switch rather than a second design.</p></div>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Prototype"><div class="wrap">
+<div class="grid2" style="gap:64px">
+<div><span class="kicker">09 — Prototype</span><h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">In motion<span class="acc">.</span></span></h2></div>
+<div class="col" style="display:flex;flex-direction:column;gap:20px"><p class="body">A clickable Figma prototype of the app.</p><p class="mono mut" style="font-size:11px;letter-spacing:.06em;margin:0">Click inside the frame to interact · Use the fullscreen icon for the best view</p></div>
+</div>
+<div class="fadeup" style="margin:56px auto 0;width:100%;max-width:460px;aspect-ratio:9/16.5;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--sur)"><iframe src="https://embed.figma.com/proto/0jflER2XpK3bB645tPkESv/iTethr---Mob-App?page-id=41175%3A43494&amp;node-id=41175-51836&amp;p=f&amp;viewport=321%2C-15%2C0.08&amp;scaling=scale-down&amp;content-scaling=fixed&amp;starting-point-node-id=41175%3A50551&amp;embed-host=share" title="iTethr interactive Figma prototype" allowfullscreen="" loading="lazy" style="width:100%;height:100%;border:0;display:block"></iframe></div>
+</div></section>
+<section class="sec" data-screen-label="Next Project"><div class="wrap fx ac jb" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px">
+<div><span class="kicker">Next up</span><h2 class="disp rv" style="font-size:clamp(32px,4vw,56px);margin-top:12px"><span class="rvi">Nuvionx<span class="acc">.</span></span></h2></div>
+<a class="btn" href="nuvionx.html">Read the case study →</a>
+</div></section>
+<footer class="fx ac jb" style="padding:28px 64px;border-top:1px solid var(--line)" data-screen-label="Footer">
+<span class="fx ac gap8 mono mut fs12" style="font-size: 14px">©2026 akhilux</span>
+<img class="logoimg" src="assets/logo.svg" alt="akhilux" style="height: 28px; width: 70px; display: block"><a class="navlink" href="#top">Go back to top ↑</a>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#00A3A3&quot;,&quot;options&quot;:[&quot;#00A3A3&quot;,&quot;#FF5149&quot;,&quot;#E31B25&quot;,&quot;#FF8400&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;showDisclaimer&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;}}">
+class Component extends DCLogic {
+  state = { menuOpen: false, light: localStorage.getItem('akhilux-theme') === 'light' };
+  updateBackLink() {
+    const el = document.getElementById('backlink');
+    if (el && /Works\.dc\.html/i.test(document.referrer)) { el.textContent = '← Back to Works'; el.setAttribute('href', 'works.html'); }
+  }
+  componentDidMount() {
+    this.updateBackLink();
+    this.applyAccent();
+    document.documentElement.classList.toggle('light', this.state.light);
+    const reveal = () => {
+      const vh = window.innerHeight;
+      document.querySelectorAll('.rv:not(.in),.fadeup:not(.in)').forEach(el => {
+        if (el.getBoundingClientRect().top < vh * 0.92) el.classList.add('in');
+      });
+    };
+    this.revealFn = reveal;
+    requestAnimationFrame(reveal);
+    this.revealTimer = setInterval(() => {
+      reveal();
+      if (!document.querySelector('.rv:not(.in),.fadeup:not(.in)')) clearInterval(this.revealTimer);
+    }, 200);
+    const markScroll = () => {
+      document.querySelectorAll('.shot').forEach(sh => {
+        const frame = sh.closest('.webv');
+        if (!frame) return;
+        frame.classList.toggle('hasScroll', sh.scrollHeight - sh.clientHeight > 8);
+        if (!sh.dataset.scrollBound) {
+          sh.dataset.scrollBound = '1';
+          sh.addEventListener('scroll', () => {
+            const f = sh.closest('.webv');
+            if (f) f.classList.toggle('scrolled', sh.scrollTop > 6);
+          });
+        }
+      });
+    };
+    this.markScroll = markScroll;
+    markScroll();
+    this.shotTimer = setInterval(markScroll, 500);
+    setTimeout(() => clearInterval(this.shotTimer), 8000);
+    window.addEventListener('resize', markScroll);
+    let c = document.getElementById('om-cursor');
+    if (!c) {
+      c = document.createElement('div');
+      c.id = 'om-cursor';
+      c.className = 'cursordot';
+      document.body.appendChild(c);
+    }
+    this.cursorEl = c;
+    this.cursorMove = e => {
+      c.style.left = e.clientX + 'px';
+      c.style.top = e.clientY + 'px';
+      const t = e.target instanceof Element ? e.target : null;
+      const hov = t && t.closest('a,button,input,textarea,.inp');
+      c.classList.toggle('hov', !!hov);
+    };
+    document.addEventListener('mousemove', this.cursorMove);
+    this.editChk = () => {
+      const ae = document.activeElement;
+      const editing = !!(ae && ae.closest && ae.closest('[contenteditable], input, textarea'));
+      document.documentElement.classList.toggle('om-editing', editing);
+    };
+    document.addEventListener('focusin', this.editChk);
+    this.editChkOut = () => setTimeout(this.editChk, 0);
+    document.addEventListener('focusout', this.editChkOut);
+    try { if (window.top !== window.self) document.documentElement.classList.add('om-host'); } catch (e) { document.documentElement.classList.add('om-host'); }
+  }
+  componentWillUnmount() {
+    document.removeEventListener('focusin', this.editChk);
+    document.removeEventListener('focusout', this.editChkOut);
+    if (this.revealTimer) clearInterval(this.revealTimer);
+    if (this.shotTimer) clearInterval(this.shotTimer);
+    if (this.markScroll) window.removeEventListener('resize', this.markScroll);
+    if (this.cursorMove) document.removeEventListener('mousemove', this.cursorMove);
+    if (this.cursorEl) this.cursorEl.remove();
+  }
+  componentDidUpdate() {
+    this.applyAccent();
+    document.documentElement.classList.toggle('light', this.state.light);
+  }
+  applyAccent() {
+    document.documentElement.style.setProperty('--acc', this.props.accent ?? '#00A3A3');
+  }
+  renderVals() {
+    return {
+      showDisclaimer: this.props.showDisclaimer ?? true,
+      menuCls: this.state.menuOpen ? 'open' : '',
+      openMenu: () => this.setState({ menuOpen: true }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      themeLabel: this.state.light ? 'Switch to dark mode' : 'Switch to light mode',
+      toggleTheme: () => this.setState(s => {
+        const light = !s.light;
+        localStorage.setItem('akhilux-theme', light ? 'light' : 'dark');
+        return { light };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>
