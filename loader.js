@@ -14,6 +14,11 @@
     '<rect id="akbar" x="263.246" y="125.141" width="104.575" height="10.453" fill="white" style="transform-box:fill-box;transform-origin:left center;transform:scaleX(0)"/>' +
     '</svg>';
 
+  var hold = document.createElement('style');
+  hold.textContent = 'html.ak-hold .fadeup{opacity:0 !important;transform:translateY(26px) !important}html.ak-hold .rvi{transform:translateY(115%) !important}html.ak-hold .mtrack{animation-play-state:paused !important}';
+  (document.head || document.documentElement).appendChild(hold);
+  document.documentElement.classList.add('ak-hold');
+  function release() { document.documentElement.classList.remove('ak-hold'); }
   var el = document.createElement('div');
   el.id = 'ak-loader';
   el.setAttribute('role', 'progressbar');
@@ -45,6 +50,7 @@
   function finish() {
     setTimeout(function () {
       el.style.opacity = '0'; el.style.pointerEvents = 'none';
+      setTimeout(release, 120);
       setTimeout(function () { el.style.display = 'none'; }, 480);
     }, 180);
   }
@@ -57,6 +63,7 @@
   }
   if (document.readyState === 'complete') complete(); else window.addEventListener('load', complete);
   setTimeout(function () { if (!done) { done = true; target = 1; } }, 8000); // safety cap
+  setTimeout(release, 10000);
   raf = requestAnimationFrame(tick);
 
   // Show on internal page navigation
@@ -74,5 +81,5 @@
     requestAnimationFrame(function () { el.style.opacity = '1'; });
     setTimeout(function () { location.href = url.href; }, 300);
   }, true);
-  window.addEventListener('pageshow', function (e) { if (e.persisted) { el.style.opacity = '0'; el.style.display = 'none'; } });
+  window.addEventListener('pageshow', function (e) { if (e.persisted) { el.style.opacity = '0'; el.style.display = 'none'; release(); } });
 })();
